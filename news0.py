@@ -19,16 +19,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Constructor
         """
         QMainWindow.__init__(self, parent)
-        self.setupUi(self)
-        #self.createConnection()
-    
-#    @pyqtSignature("QString")
-#    def on_urlLine_textEdited(self, p0):
-#        """
-#        Slot documentation goes here.
-#        """
-#        #
-#        raise NotImplementedError
+        self.ui = Ui_MainWindow()
+        
+        self.ui.setupUi(self)
+        self.ui.tableView.resizeColumnToContents(0)
+        #model = Model()
 
     
     @pyqtSignature("")
@@ -36,55 +31,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         网址输入
         """
-        url = self.urlLine.text()
+        url = self.ui.urlLine.text()
         print type(url)
-        self.testText.setPlainText(url)
-        #self.plainTextEdit.insertPlainText()
-        #raise NotImplementedError
-  
+        self.ui.testText.setPlainText(url)
+
     @pyqtSignature("")
     def on_backbutton_released(self):
         """
         反向编辑
         """
-        url = self.testText.toPlainText()
+        url = self.ui.testText.toPlainText()
         print type(url)
-        self.urlLine.setText(url)
-        #raise NotImplementedError
-    def createConnection(self):    #数据库操作
-        #db = 
-        db = QSqlDatabase.addDatabase("QMYSQL")
-        host = "localhost"
-        port = 3306
-        database = "android"
-        username = "root"
-        password = ""
-        db.setHostName(host)
-        db.setPort(port)
-        db.setDatabaseName(database)
-        db.setUserName(username)
-        db.setPassword(password)
-        if not db.open():
-            print("error")
-            QMessageBox.warning(None, u"数据库连接出错", QSqlDatabase.lastError(db).text())
-            print (QSqlDatabase.lastError(db).text()) #打印错误信息
+        self.ui.urlLine.setText(url)
 
-        else:
-            print ("ok")
     def showdata(self):
         q = QSqlQuery()
         select = "SELECT * FROM t_news;"
     
     @pyqtSignature("QModelIndex")
-    def on_tableView_doubleClicked(self, index):
-        """
-        Slot documentation goes here.
-        """
-        self.tableView.resizeColumnToContents(0)
-        # TODO: not implemented yet
-        #raise NotImplementedError
-        print ("doubleclicked")
-        #q.exec_(select)
+    def on_tableView_clicked(self, index):    #表格元素点击
+        print ("clicked")
+        print (index.column(), index.row())
+    
+    @pyqtSignature("QModelIndex")
+    def on_tableView_doubleClicked(self, index):    #表格元素双击
+        item = QStandardItem()
+        print type(item)
+        row = index.row()
+        column = index.column()
+        #print self.ui.tableView.item(row, column).text()
+        #print Model.data(Model.index(row, column)).text()
+        #print Model.index(row, 0).data().toInt()[0]
+        #print self.ui.tableView.selectionModel().model().index(row, 0).data().toInt()[0]
+        print self.ui.tableView.model().index(row, 0).data().toInt()[0]
+        #print self.ui.tableView.model().index(row, 2).data().toString()[0]
+        #print self.ui.tableView.currentIndex().row()
+        cid = row
+
+        #self.ui.titleedit.setPlainText(title)
+        self.ui.tableView.selectRow(row)
+
 class Model(QSqlTableModel):   #数据表操作
     def __init__(self, parent = None):
         QSqlTableModel.__init__(self, parent)
@@ -94,15 +80,21 @@ class Model(QSqlTableModel):   #数据表操作
         print self.selectStatement()
         #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         q = QSqlQuery()
-        q.exec_("SELECT title FROM t_news;")
+        q.exec_("SELECT nid,cid,title FROM t_news;")
         self.setQuery(q)
 
         #self.setFilter("")
         #self.setQuery()
         self.select()
-        mainWindow.tableView.setModel(self)
-def createConnection(self):    #数据库操作
-        #db = 
+        print(1, 1)
+        print self.index(5, 0).data().toInt()[0] 
+        #print type(self.index(5, 0).data().toInt())
+        
+        mainWindow.ui.tableView.setModel(self)
+        mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
+        mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
+        mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
+def createConnection():    #数据库操作
         db = QSqlDatabase.addDatabase("QMYSQL")
         host = "localhost"
         port = 3306
@@ -114,10 +106,10 @@ def createConnection(self):    #数据库操作
         db.setDatabaseName(database)
         db.setUserName(username)
         db.setPassword(password)
-        if not db.open():
+        if not db.open():    #打印错误信息
             print("error")
             QMessageBox.warning(None, u"数据库连接出错", QSqlDatabase.lastError(db).text())
-            print (QSqlDatabase.lastError(db).text()) #打印错误信息
+            print (QSqlDatabase.lastError(db).text()) 
         else:
             print ("ok")
 def showdata(self):
@@ -133,9 +125,8 @@ if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
 
     mainWindow = MainWindow()
-    mainWindow.show()    #显示主窗口
-    
-    createConnection(1)  #连接数据库
+    mainWindow.show()    #显示主窗口  
+    createConnection()  #连接数据库
     Model()
     
 

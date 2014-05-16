@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>845</width>
-    <height>604</height>
+    <width>885</width>
+    <height>616</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,12 +25,27 @@
      <rect>
       <x>30</x>
       <y>90</y>
-      <width>481</width>
+      <width>461</width>
       <height>351</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::TabFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::North</enum>
+    </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Rounded</enum>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
+    </property>
+    <property name="elideMode">
+     <enum>Qt::ElideNone</enum>
     </property>
     <widget class="QWidget" name="tab1">
      <attribute name="title">
@@ -181,7 +196,7 @@
      <string>test</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="choose1box">
+   <widget class="QComboBox" name="categorizebox_p">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -224,25 +239,132 @@
      <string>OK</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="bodyedit">
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>40</y>
-      <width>271</width>
-      <height>41</height>
+      <y>129</y>
+      <width>360</width>
+      <height>321</height>
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_2">
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>490</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="titleedit">
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>70</y>
-      <width>271</width>
-      <height>451</height>
+      <y>10</y>
+      <width>360</width>
+      <height>20</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>2</width>
+      <height>0</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="digestedit">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>49</y>
+      <width>360</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>460</y>
+      <width>80</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>update</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>460</y>
+      <width>80</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>reset</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>0</y>
+      <width>20</width>
+      <height>561</height>
+     </rect>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="categorizebox_m">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>470</y>
+      <width>69</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>国际</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>体育</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>科技</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>测试</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QToolBar" name="toolBar_2">
@@ -263,7 +385,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>845</width>
+     <width>885</width>
      <height>23</height>
     </rect>
    </property>
