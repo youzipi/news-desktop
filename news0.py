@@ -3,6 +3,9 @@
 """
 Module implementing MainWindow.
 """
+import sys
+import urllib2,urllib,re
+from bs4 import BeautifulSoup
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 from PyQt4.QtCore import pyqtSignature, QString
@@ -30,10 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
-        
-        self.ui.setupUi(self)
-        self.ui.tableView.resizeColumnToContents(0)
-        
+        self.ui.setupUi(self)        
 
     
     @pyqtSignature("")
@@ -42,10 +42,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         网址输入
         """
         url = self.ui.urlLine.text()
-        print ("ok_button realeased")
         print url
+        url = str(url)
         print type(url)
-        self.ui.testText.setPlainText(url)
+        print ("ok_button realeased")
+        #print load(url)
+        title, body = load(url)
+        print "title:"+title
+        self.ui.titleedit.setPlainText(title)
+        self.ui.bodyedit.setPlainText(body)
+        #print type(title)
+        #print url
+        #print type(url)
+        #self.ui.testText.setPlainText(title)
 
     @pyqtSignature("")
     def on_backbutton_released(self):
@@ -90,19 +99,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             digest = q.value(2).toString()
             body = q.value(3).toString()
             body.replace('<p>', '')
-            body.replace('</p>', r'\n')
+            body.replace('</p>', '')
         print type(title)
 
         self.ui.titleedit.setPlainText(title)
         self.ui.digestedit.setPlainText(digest)
         #self.ui.bodyedit.setPlainText(body)
         #self.ui.bodyedit.setPlainText(body)
-        body = unicode(QString(body).toUtf8(), 'utf-8', 'ignore')
+        #body = unicode(QString(body).toUtf8(), 'utf-8', 'ignore')
         #print type(body)
         #body = html_to_text(body)
         #print body
         #self.ui.bodyedit.setPlainText(body)
-        body = text_to_html(body)
+        #body = text_to_html(body)
         self.ui.bodyedit.setPlainText(body)
         print type(body)
        
@@ -111,21 +120,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #self.ui.bodyedit.setPlainText(dehtml(body))
         
         #self.ui.titleedit.
-
-    
+    '''
+    数据库更新
+    '''
     @pyqtSignature("")
     def on_updatebutton_clicked(self):
         """
         Slot documentation goes here.
         """
-#        textCursor = self.ui.bodyedit.textCursor()
-#        startPos = textCursor.position()
-#        textCursor.setPosition(startPos)
-#        textCursor.movePosition(QTextCursor.Down, QTextCursor.KeepAnchor)
-#        endPos = textCursor.position()
-#        lineContent = unicode(textCursor.selectedText())
-#        print lineContent
-        body = self.ui.bodyedit.toHtml()
+
+        body = self.ui.bodyedit.toPlainText()
         print type(body)
         self.ui.bodyedit.setPlainText(body)
         
@@ -140,7 +144,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
   
         
-        
+
 """
 数据库连接
 """    
@@ -161,7 +165,7 @@ def createConnection():
             QMessageBox.warning(None, u"数据库连接出错", QSqlDatabase.lastError(db).text())
             print (QSqlDatabase.lastError(db).text()) 
         else:
-            print ("ok")
+            print ("ook")
             
 """
 数据表操作
@@ -172,7 +176,7 @@ class Model(QSqlTableModel):
         self.setTable("t_news")
         #t = self.select()
         #print t
-        print self.selectStatement()
+        #print self.selectStatement()
         #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         q = QSqlQuery()
         q.exec_("SELECT nid,cid,title FROM t_news;")
@@ -181,8 +185,8 @@ class Model(QSqlTableModel):
         #self.setFilter("")
         #self.setQuery()
         self.select()
-        print(1, 1)
-        print self.index(5, 0).data().toInt()[0] 
+        #print(1, 1)
+        #print self.index(5, 0).data().toInt()[0] 
         #print type(self.index(5, 0).data().toInt())
         
         mainWindow.ui.tableView.setModel(self)
@@ -211,6 +215,5 @@ if __name__ == '__main__':
     createConnection()  #连接数据库
     Model()
     #while True:
-        
     
     sys.exit(app.exec_())

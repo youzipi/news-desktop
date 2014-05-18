@@ -6,8 +6,7 @@ from bs4 import BeautifulSoup
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-#伪装成浏览器
-headers = { 'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1;en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}
+
 
 def load(url):
     try:
@@ -19,7 +18,8 @@ def load(url):
     #print type(title)   #<class 'bs4.element.Tag'>
     print title.string
     #print type(title.string)   #<class 'bs4.element.NavigableString'>
-    title = str(title)
+    title = str(title.string).decode('utf-8')
+    print "title:"+title
     print type(title)
     t = soup.find_all("p")
     count = 0
@@ -29,22 +29,26 @@ def load(url):
         body = str(i.string)
         if body == "None":
             body = "\n"
-        print body.decode('utf-8')#.encode('gb2312')
+        body = body.decode('utf-8')#.encode('gb2312')
+        print body
         text  = text+body+"\n"
-        s = raw_input()
-        print text.decode('utf-8')
+        #s = raw_input()
+        #print text.decode('utf-8')
         count+=1
 
 
     print "count:%d" % count
-    print body
+    #print body
+    return title, text
 
     
     
     
-url = "http://www.tuicool.com/articles/Fruiqyj"
+#url = "http://www.tuicool.com/articles/Fruiqyj"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
-url = "http://news.163.com/14/0516/22/9SDAH8JQ00014JB5.html"
+#url = "http://news.163.com/14/0516/22/9SDAH8JQ00014JB5.html"
 
-#download(url)
+#title,body = load(url)
+#print title
+#print body
     
