@@ -5,12 +5,13 @@ Module implementing MainWindow.
 """
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-from PyQt4.QtCore import pyqtSignature
+from PyQt4.QtCore import pyqtSignature, QString
 from PyQt4.QtSql import *
 
 from Ui_news0 import Ui_MainWindow
-from html2text import _DeHTMLParser, dehtml, txt2html
-from text2html import *
+#from html2text import _DeHTMLParser, dehtml, txt2html
+#from text2html import *
+from spider import *
 #from SqlModel import Model
 
 
@@ -32,7 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         self.ui.setupUi(self)
         self.ui.tableView.resizeColumnToContents(0)
-        #model = Model()
+        
 
     
     @pyqtSignature("")
@@ -41,6 +42,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         网址输入
         """
         url = self.ui.urlLine.text()
+        print ("ok_button realeased")
+        print url
         print type(url)
         self.ui.testText.setPlainText(url)
 
@@ -86,19 +89,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             title = q.value(1).toString()
             digest = q.value(2).toString()
             body = q.value(3).toString()
-            #body.replace('<p>', '')
-            #body.replace('</p>', r'')
+            body.replace('<p>', '')
+            body.replace('</p>', r'\n')
         print type(title)
-        #print title
-        
-        #return cid
-
 
         self.ui.titleedit.setPlainText(title)
         self.ui.digestedit.setPlainText(digest)
         #self.ui.bodyedit.setPlainText(body)
-        #print html_to_text(body)
-        print text_to_html(str(body))
+        #self.ui.bodyedit.setPlainText(body)
+        body = unicode(QString(body).toUtf8(), 'utf-8', 'ignore')
+        #print type(body)
+        #body = html_to_text(body)
+        #print body
+        #self.ui.bodyedit.setPlainText(body)
+        body = text_to_html(body)
+        self.ui.bodyedit.setPlainText(body)
+        print type(body)
        
         #print s
 
@@ -106,12 +112,43 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         #self.ui.titleedit.
 
+    
+    @pyqtSignature("")
+    def on_updatebutton_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+#        textCursor = self.ui.bodyedit.textCursor()
+#        startPos = textCursor.position()
+#        textCursor.setPosition(startPos)
+#        textCursor.movePosition(QTextCursor.Down, QTextCursor.KeepAnchor)
+#        endPos = textCursor.position()
+#        lineContent = unicode(textCursor.selectedText())
+#        print lineContent
+        body = self.ui.bodyedit.toHtml()
+        print type(body)
+        self.ui.bodyedit.setPlainText(body)
+        
+    
+    @pyqtSignature("")
+    def on_resetbutton_clicked(self):
+        """
+        Slot documentation goes here.
+        """
+        # TODO: not implemented yet
+        #raise NotImplementedError
 
-def createConnection():    #数据库操作
+  
+        
+        
+"""
+数据库连接
+"""    
+def createConnection():    
         db = QSqlDatabase.addDatabase("QMYSQL")
         host = "localhost"
         port = 3306
-        database = "android"
+        database = "test"
         username = "root"
         password = ""
         db.setHostName(host)
@@ -126,14 +163,10 @@ def createConnection():    #数据库操作
         else:
             print ("ok")
             
-
-
-
-
-
-
-
-class Model(QSqlTableModel):   #数据表操作
+"""
+数据表操作
+"""
+class Model(QSqlTableModel):   
     def __init__(self, parent = None):
         QSqlTableModel.__init__(self, parent)
         self.setTable("t_news")

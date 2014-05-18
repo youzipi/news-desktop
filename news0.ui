@@ -309,7 +309,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="updatebutton">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -322,7 +322,7 @@
      <string>update</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="resetbutton">
     <property name="geometry">
      <rect>
       <x>790</x>

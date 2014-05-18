@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news0.ui'
 #
-# Created: Sat May 17 22:25:49 2014
+# Created: Sun May 18 15:46:22 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -132,12 +132,12 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.digestedit.setFont(font)
         self.digestedit.setObjectName(_fromUtf8("digestedit"))
-        self.pushButton_2 = QtGui.QPushButton(self.centralWidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(700, 510, 80, 40))
-        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
-        self.pushButton_3 = QtGui.QPushButton(self.centralWidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(790, 510, 80, 40))
-        self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.updatebutton = QtGui.QPushButton(self.centralWidget)
+        self.updatebutton.setGeometry(QtCore.QRect(700, 510, 80, 40))
+        self.updatebutton.setObjectName(_fromUtf8("updatebutton"))
+        self.resetbutton = QtGui.QPushButton(self.centralWidget)
+        self.resetbutton.setGeometry(QtCore.QRect(790, 510, 80, 40))
+        self.resetbutton.setObjectName(_fromUtf8("resetbutton"))
         self.line = QtGui.QFrame(self.centralWidget)
         self.line.setGeometry(QtCore.QRect(490, 0, 20, 561))
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
@@ -221,8 +221,8 @@ class Ui_MainWindow(object):
         self.categorizebox_p.setItemText(3, _translate("MainWindow", "测试", None))
         self.okbutton.setText(_translate("MainWindow", "OK", None))
         self.pushButton.setText(_translate("MainWindow", "PushButton", None))
-        self.pushButton_2.setText(_translate("MainWindow", "update", None))
-        self.pushButton_3.setText(_translate("MainWindow", "reset", None))
+        self.updatebutton.setText(_translate("MainWindow", "update", None))
+        self.resetbutton.setText(_translate("MainWindow", "reset", None))
         self.categorizebox_m.setItemText(0, _translate("MainWindow", "国际", None))
         self.categorizebox_m.setItemText(1, _translate("MainWindow", "体育", None))
         self.categorizebox_m.setItemText(2, _translate("MainWindow", "科技", None))
