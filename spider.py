@@ -16,28 +16,30 @@ def load(url):
     soup = BeautifulSoup(html,from_encoding='GB18030')
     title = soup.head.title
     #print type(title)   #<class 'bs4.element.Tag'>
-    print title.string
+    #print title.string
     #print type(title.string)   #<class 'bs4.element.NavigableString'>
     title = str(title.string).decode('utf-8')
-    print "title:"+title
-    print type(title)
+    #print "title:"+title
+    #print type(title)
     t = soup.find_all("p")
     count = 0
     text = ""
     for i in t:
-        print count
+        #print count
         body = str(i.string)
         if body == "None":
             body = "\n"
-        body = body.decode('utf-8')#.encode('gb2312')
-        print body
-        text  = text+body+"\n"
+            text  = text+body
+        else:
+            body = body.decode('utf-8')#.encode('gb2312')
+        #print body
+            text  = text+body+"\n"
         #s = raw_input()
         #print text.decode('utf-8')
         count+=1
 
 
-    print "count:%d" % count
+    #print "count:%d" % count
     #print body
     return title, text
 
