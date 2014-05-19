@@ -54,33 +54,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         url = self.ui.urlLine.text()
         print url
         url = str(url)
-        #print type(url)
         print ("ok_button realeased")
+        self.ui.urlLine.setText("")
+
         print self.ui.categorizebox_p.currentIndex()+1
         self.cid = self.ui.categorizebox_p.currentIndex()+1
-        #print load(url)
-        self.title, self.body = load(url)
-        #print "title:"+self.title
+        self.title, self.body = load(url)       #网页解析
         self.ui.titleedit.setPlainText(self.title)
         self.ui.bodyedit.setPlainText(self.body)
         q = QSqlQuery()
+        #nidmax = Model.rowCount(Model)
         #tuple1 = (self.nidmax+1, self.cid, self.title.encode('utf-8') , self.body.encode('utf-8') , "1".encode('utf-8'))
         tuple1 = (self.nidmax+1, self.cid, self.title , self.body , "1")
         #tuple1 = (self.nidmax+1, self.cid, "1" , "1" , "1")
-        #tuple1 = (self.nidmax+1, 1, "1" , "1" , "1")
-        #insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,%s,%s,%d);" % tuple1
-        #print insert
-        #q.exec_(insert)
-        #self.tableupdate()
-        #rowNum Model.rowCount()
-        #Model.submitAll()
         Model.insert(self.ui.tableView.model(), tuple1)
-        #Model.insert(self.ui.tableView.model(), self.nidmax+1, self.cid, self.title , self.body , "1")
-        self.nidmax += 1
-        #print type(title)
-        #print url
-        #print type(url)
-        #self.ui.testText.setPlainText(title)
+        #print "self.nidmax:"
+        #print self.nidmax
+
 
     @pyqtSignature("")
     def on_backbutton_released(self):
@@ -135,14 +125,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.digestedit.setPlainText(self.digest)
         self.ui.bodyedit.setPlainText(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
-        #self.ui.bodyedit.setPlainText(body)
-        #self.ui.bodyedit.setPlainText(body)
-        #body = unicode(QString(body).toUtf8(), 'utf-8', 'ignore')
-        #print type(body)
-        #body = html_to_text(body)
-        #print body
-        #self.ui.bodyedit.setPlainText(body)
-        #body = text_to_html(body)
 
 
     '''
@@ -188,8 +170,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
 
 
-  
-        
 
 """
 数据库连接
@@ -206,8 +186,6 @@ def createConnection():
         db.setDatabaseName(database)
         db.setUserName(username)
         db.setPassword(password)
-        #db.exec('SET NAMES utf8')
-        #db.setcharset='utf8'
         if not db.open():    #打印错误信息
             print("error")
             QMessageBox.warning(None, u"数据库连接出错", QSqlDatabase.lastError(db).text())
@@ -222,71 +200,42 @@ class Model(QSqlTableModel):
     def __init__(self, parent = None):
         QSqlTableModel.__init__(self, parent)
         self.setTable("t_news")
-        #t = self.select()
-        #print t
+
         #print self.selectStatement()
         #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.q = QSqlQuery()
         self.q.exec_("SELECT nid,cid,title FROM t_news;")
         self.setQuery(self.q)
-        #self.setFilter("")
-        #self.setQuery()
+
         self.select()
         mainWindow.nidmax = self.rowCount()
 
-        #print(1, 1)
-        #print self.index(5, 0).data().toInt()[0] 
-        #print type(self.index(5, 0).data().toInt())
-        
         mainWindow.ui.tableView.setModel(self)
         mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
         mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
-        
         print "Model()"
-        print mainWindow.nidmax
     def search(nid):
         #q = QSqlQuery()
         #q.exec_("SELECT title FROM t_news WHERE nid = "+nid+";")
         q.exec_("SELECT title,digest,body FROM t_news WHERE nid = "+nid+";")
         #print ("select"+cid)
     def showdata(self):
-        self.q.exec_("SELECT nid,cid,title FROM t_news;")
-        mainWindow.nidmax = self.rowCount()
-        mainWindow.ui.tableView.setModel(self)
-        mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
-        mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
-        mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
-        mainWindow.ui.tableView.show()
+        self.__init__()
         r = self.rowCount()
+        print "Model.rowCount():"
+        print r
 
         
         print ("show data")
     def insert(self, tuple1):
-    #def insert(self, nid,cid,title,body,ptime = "1"):
         insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
-        #rowNum = self.rowCount()
-        #print "rowCount:"
-        #print rowNum
-        #self.insertRow(rowNum)
-        #self.setData(self.index(rowNum,0),nid)
-        #self.setData(self.index(rowNum,1),cid)
-        #self.setData(self.index(rowNum,2),title)
-        #print 
-        #body = body.decode()
-        #print type(body)
-        #self.setData(self.index(rowNum,4),body)
-        #self.setData(self.index(rowNum,7),ptime)
-        #flag = self.submitAll()
-        #print flag
         flag = self.q.exec_(unicode(insert))
-        print unicode(insert)
+        #print unicode(insert)
         print flag
-        #self.submitAll()
         print ("insert succeed")
         if flag == False: 
-            #QMessageBox.warning(None, "ERROR",self.q.lastError())
             print self.q.lastError()
             print (self.q.lastError().text())
             print type(self.q.lastError().text())
@@ -304,6 +253,5 @@ if __name__ == '__main__':
     mainWindow.show()    #显示主窗口  
     createConnection()  #连接数据库
     Model()
-    #while True:
     
     sys.exit(app.exec_())
