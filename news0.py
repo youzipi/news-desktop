@@ -6,7 +6,7 @@ Module implementing MainWindow.
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
-import urllib2,urllib,re
+#import urllib2,urllib,re
 from bs4 import BeautifulSoup
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtGui import *
@@ -22,11 +22,10 @@ from spider import *
 QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
 QtCore.QTextCodec.setCodecForLocale ( QtCore.QTextCodec.codecForName("UTF-8"))
 
-#QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 
 
 
-#nidmax = 0
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
@@ -38,8 +37,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        
         self.nid = 0
-        self.nidmax = 0
         self.cid = 1
         self.title = ""       
         self.digest = ""       
@@ -63,10 +62,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.titleedit.setPlainText(self.title)
         self.ui.bodyedit.setPlainText(self.body)
         q = QSqlQuery()
-        #nidmax = Model.rowCount(Model)
-        #tuple1 = (self.nidmax+1, self.cid, self.title.encode('utf-8') , self.body.encode('utf-8') , "1".encode('utf-8'))
-        tuple1 = (self.nidmax+1, self.cid, self.title , self.body , "1")
-        #tuple1 = (self.nidmax+1, self.cid, "1" , "1" , "1")
+        r = self.ui.tableView.model().rowCount()
+        print "Model.rowCount():"
+        print r
+        print "index(r,0).data().toInt()"
+        self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1
+        print self.nid
+        tuple1 = (self.nid, self.cid, self.title , self.body , "1")
         Model.insert(self.ui.tableView.model(), tuple1)
         #print "self.nidmax:"
         #print self.nidmax
@@ -98,10 +100,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #print Model.data(Model.index(row, column)).text()
         #print Model.index(row, 0).data().toInt()[0]
         #print self.ui.tableView.selectionModel().model().index(row, 0).data().toInt()[0]
-        nid = self.ui.tableView.model().index(row, 0).data().toInt()[0]
+        self.nid = self.ui.tableView.model().index(row, 0).data().toInt()[0]
         print "nid:"
-        print nid
-        self.search(nid)
+        print self.nid
+        self.search(self.nid)
 
     def search(self, nid):
         q = QSqlQuery()
@@ -135,13 +137,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         Slot documentation goes here.
         """
-
+        self.cid = self.ui.categorizebox_m.currentIndex()+1
         self.body = self.ui.bodyedit.toPlainText() #已修改的文本
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
+        tuple2 = (self.cid, self.title, self.digest, self.body, self.nid)
+        Model.update(self.ui.tableView.model(), tuple2)
         
-        #print type(body)
-        self.ui.bodyedit.setPlainText(self.body)
         
     
     @pyqtSignature("")
@@ -156,24 +158,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.digestedit.setPlainText(self.digest)
         self.ui.bodyedit.setPlainText(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
-    def tableupdate(self, parent = None):
-        QSqlTableModel.__init__(self, parent)
-        self.setTable("t_news")
-        q = QSqlQuery()
-        q.exec_("SELECT nid,cid,title FROM t_news;")
-        self.setQuery(q)
-        self.select()
-        self.nidmax = self.rowCount()
-        self.ui.tableView.setModel(self)
-        self.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
-        self.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
-        self.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
-
+    @pyqtSignature("")
+    def on_deletebutton_clicked(self):
+        Model.delete(self.ui.tableView.model(), self.nid)
 
 
 """
 数据库连接
-"""    
+"""
 def createConnection():    
         db = QSqlDatabase.addDatabase("QMYSQL")
         host = "localhost"
@@ -206,9 +198,7 @@ class Model(QSqlTableModel):
         self.q = QSqlQuery()
         self.q.exec_("SELECT nid,cid,title FROM t_news;")
         self.setQuery(self.q)
-
         self.select()
-        mainWindow.nidmax = self.rowCount()
 
         mainWindow.ui.tableView.setModel(self)
         mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
@@ -217,18 +207,21 @@ class Model(QSqlTableModel):
         mainWindow.ui.tableView.show()
         print "Model()"
     def search(nid):
-        #q = QSqlQuery()
-        #q.exec_("SELECT title FROM t_news WHERE nid = "+nid+";")
         q.exec_("SELECT title,digest,body FROM t_news WHERE nid = "+nid+";")
-        #print ("select"+cid)
     def showdata(self):
         self.__init__()
-        r = self.rowCount()
-        print "Model.rowCount():"
-        print r
-
+    def update(self,tuple2):
+        update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s' WHERE nid = %d;" % tuple2
+        flag2 = self.q.exec_(unicode(update))
+        print flag2
+        print ("update succeed")
+        if flag2 == False: 
+            print self.q.lastError()
+            print (self.q.lastError().text())
+            print type(self.q.lastError().text())
+        self.setEditStrategy(QSqlTableModel.OnManualSubmit)
+        self.showdata()
         
-        print ("show data")
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
         flag = self.q.exec_(unicode(insert))
@@ -236,6 +229,17 @@ class Model(QSqlTableModel):
         print flag
         print ("insert succeed")
         if flag == False: 
+            print self.q.lastError()
+            print (self.q.lastError().text())
+            print type(self.q.lastError().text())
+        self.setEditStrategy(QSqlTableModel.OnManualSubmit)
+        self.showdata()
+    def delete(self,nid):
+        delete = "DELETE FROM t_news WHERE nid = %d;" % nid
+        flag3 = self.q.exec_(unicode(delete))
+        print flag3
+        print ("delete succeed")
+        if flag3 == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
             print type(self.q.lastError().text())
