@@ -16,6 +16,13 @@
     <height>0</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <bold>false</bold>
+    <underline>false</underline>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -42,7 +49,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -205,6 +212,25 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>焦点</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>国内</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>国际</string>
@@ -217,12 +243,12 @@
     </item>
     <item>
      <property name="text">
-      <string>科技</string>
+      <string>文娱</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>测试</string>
+      <string>科技</string>
      </property>
     </item>
    </widget>
@@ -309,7 +335,7 @@
      </font>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="updatebutton">
     <property name="geometry">
      <rect>
       <x>700</x>
@@ -322,7 +348,7 @@
      <string>update</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="resetbutton">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -360,6 +386,25 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>SimSun-ExtB</family>
+      <pointsize>10</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>焦点</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>国内</string>
+     </property>
+    </item>
     <item>
      <property name="text">
       <string>国际</string>
@@ -372,12 +417,12 @@
     </item>
     <item>
      <property name="text">
-      <string>科技</string>
+      <string>文娱</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>测试</string>
+      <string>科技</string>
      </property>
     </item>
    </widget>
@@ -446,6 +491,23 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>urlLine</tabstop>
+  <tabstop>categorizebox_p</tabstop>
+  <tabstop>okbutton</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>titleedit</tabstop>
+  <tabstop>digestedit</tabstop>
+  <tabstop>bodyedit</tabstop>
+  <tabstop>updatebutton</tabstop>
+  <tabstop>resetbutton</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>listView</tabstop>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>backbutton</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>testText</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
