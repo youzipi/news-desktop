@@ -6,7 +6,7 @@ Module implementing MainWindow.
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
-#import urllib2,urllib,re
+
 from bs4 import BeautifulSoup
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtGui import *
@@ -14,10 +14,8 @@ from PyQt4.QtCore import pyqtSignature, QString
 from PyQt4.QtSql import *
 
 from Ui_news0 import Ui_MainWindow
-#from html2text import _DeHTMLParser, dehtml, txt2html
-#from text2html import *
 from spider import *
-#from SqlModel import Model
+
 
 QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
 QtCore.QTextCodec.setCodecForLocale ( QtCore.QTextCodec.codecForName("UTF-8"))
@@ -70,10 +68,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print self.nid
         tuple1 = (self.nid, self.cid, self.title , self.body , "1")
         Model.insert(self.ui.tableView.model(), tuple1)
-        #print "self.nidmax:"
-        #print self.nidmax
-
-
     @pyqtSignature("")
     def on_backbutton_released(self):
         """
@@ -96,10 +90,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = index.row()
         column = index.column()
         self.ui.tableView.selectRow(row)
-        #print self.ui.tableView.item(row, column).text()
-        #print Model.data(Model.index(row, column)).text()
-        #print Model.index(row, 0).data().toInt()[0]
-        #print self.ui.tableView.selectionModel().model().index(row, 0).data().toInt()[0]
         self.nid = self.ui.tableView.model().index(row, 0).data().toInt()[0]
         print "nid:"
         print self.nid
@@ -111,15 +101,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selection = "SELECT cid,title,digest,body FROM t_news WHERE nid = "+nid+";"
         print selection
         q.exec_(selection)
-        #print type(q)
         if q.first():        #读取cid，标题，摘要和正文
             self.cid = q.value(0).toInt()[0]
             print type(self.cid)
             self.title = q.value(1).toString()
             self.digest = q.value(2).toString()
             self.body = q.value(3).toString()
-            #body.replace('<p>', '')
-            #body.replace('</p>', '')
         '''
         显示分类，标题，摘要和正文
         '''
@@ -143,8 +130,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.digest = self.ui.digestedit.toPlainText()
         tuple2 = (self.cid, self.title, self.digest, self.body, self.nid)
         Model.update(self.ui.tableView.model(), tuple2)
-        
-        
     
     @pyqtSignature("")
     def on_resetbutton_clicked(self):
@@ -152,7 +137,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         print ("reset Button clicked")
-        #search(nid)
         print self.nid
         self.ui.titleedit.setPlainText(self.title)
         self.ui.digestedit.setPlainText(self.digest)
@@ -192,9 +176,6 @@ class Model(QSqlTableModel):
     def __init__(self, parent = None):
         QSqlTableModel.__init__(self, parent)
         self.setTable("t_news")
-
-        #print self.selectStatement()
-        #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.q = QSqlQuery()
         self.q.exec_("SELECT nid,cid,title FROM t_news;")
         self.setQuery(self.q)
@@ -206,8 +187,10 @@ class Model(QSqlTableModel):
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
         print "Model()"
+        
     def search(nid):
         q.exec_("SELECT title,digest,body FROM t_news WHERE nid = "+nid+";")
+        
     def showdata(self):
         self.__init__()
     def update(self,tuple2):
@@ -225,7 +208,6 @@ class Model(QSqlTableModel):
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
         flag = self.q.exec_(unicode(insert))
-        #print unicode(insert)
         print flag
         print ("insert succeed")
         if flag == False: 
@@ -246,7 +228,6 @@ class Model(QSqlTableModel):
         self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.showdata()
             
-
 
 if __name__ == '__main__':
     import sys
