@@ -57,8 +57,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.titleedit.setPlainText(self.title)
         self.ui.bodyedit.setPlainText(self.body)
         q = QSqlQuery()
-        r = self.ui.tableView.model().rowCount()
-        self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1
+        r = self.ui.tableView.model().rowCount()  
+        self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1 #获取插入位置
         tuple1 = (self.nid, self.cid, self.title , self.body , "1")
         Model.insert(self.ui.tableView.model(), tuple1)
 
@@ -75,11 +75,142 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.tableView.selectRow(row)
         self.nid = self.ui.tableView.model().index(row, 0).data().toInt()[0]
         self.search(self.nid)
+        
+    @pyqtSignature("QModelIndex")
+    def on_tableView_1_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_1.selectRow(row)
+        self.nid = self.ui.tableView_1.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+        
+    @pyqtSignature("QModelIndex")
+    def on_tableView_2_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_2.selectRow(row)
+        self.nid = self.ui.tableView_2.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+
+    @pyqtSignature("QModelIndex")
+    def on_tableView_3_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_3.selectRow(row)
+        self.nid = self.ui.tableView_3.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+        
+    @pyqtSignature("QModelIndex")
+    def on_tableView_4_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_4.selectRow(row)
+        self.nid = self.ui.tableView_4.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+    @pyqtSignature("QModelIndex")
+    def on_tableView_5_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_5.selectRow(row)
+        self.nid = self.ui.tableView_5.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+    @pyqtSignature("QModelIndex")
+    def on_tableView_6_clicked(self, index):
+        row = index.row()
+        self.ui.tableView_6.selectRow(row)
+        self.nid = self.ui.tableView_6.model().index(row, 0).data().toInt()[0]
+        self.search(self.nid)
+
+        
+        
+     
+    def showtables(self):
+        tab1 = QSqlTableModel()
+        tab2 = QSqlTableModel()
+        tab3 = QSqlTableModel()
+        tab4 = QSqlTableModel()
+        tab5 = QSqlTableModel()
+        tab6 = QSqlTableModel()
+        
+        tab1.setTable("t_news")
+        tab2.setTable("t_news")
+        tab3.setTable("t_news")
+        tab4.setTable("t_news")
+        tab5.setTable("t_news")
+        tab6.setTable("t_news")
+        
+        selection = "SELECT nid,title FROM t_news;"
+        q = QSqlQuery()
+        q.exec_(selection) #% 1
+        
+        tab1.setQuery(q)
+        tab1.setFilter("cid = 1")
+        tab1.select()
+        self.ui.tableView_1.setModel(tab1) 
+        self.ui.tableView_1.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_1.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_1.show()
+        
+
+        tab2.setQuery(q)
+        tab2.setFilter("cid = 2")
+        tab2.select()
+        self.ui.tableView_2.setModel(tab2) 
+        self.ui.tableView_2.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_2.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_2.show()
+        
+        tab3.q = QSqlQuery()
+        tab3.q.exec_(selection) #% 1
+        tab3.setQuery(q)
+        tab3.setFilter("cid = 3")
+        tab3.select()
+        self.ui.tableView_3.setModel(tab3) 
+        self.ui.tableView_3.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_3.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_3.show()
+        
+        tab4.q = QSqlQuery()
+        tab4.q.exec_(selection) #% 1
+        tab4.setQuery(q)
+        tab4.setFilter("cid = 4")
+        tab4.select()
+        self.ui.tableView_4.setModel(tab1) 
+        self.ui.tableView_4.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_4.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_4.show()
+        
+        tab5.q = QSqlQuery()
+        tab5.q.exec_(selection) #% 1
+        tab5.setQuery(q)
+        tab5.setFilter("cid = 5")
+        tab5.select()
+        self.ui.tableView_5.setModel(tab5) 
+        self.ui.tableView_5.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_5.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_5.show()
+        
+        tab6.q = QSqlQuery()
+        tab6.q.exec_(selection) #% 1
+        tab6.setQuery(q)
+        tab6.setFilter("cid = 6")
+        tab6.select()
+        self.ui.tableView_6.setModel(tab6) 
+        self.ui.tableView_6.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_6.resizeColumnToContents(1) #tableview列自适应宽度
+        self.ui.tableView_6.show()
+        
+
+        
+        #if flag2 == False: 
+         #   print tab2.q.lastError()
+         #   print (tab2.q.lastError().text())
+         #   print type(tab2.q.lastError().text())
+        
+        
+        #tab2.q.exec_("SELECT title FROM t_news where cid = 2;") #% 2
+        #tab2.setQuery(tab2.q)
+
 
     def search(self, nid):
         q = QSqlQuery()
-        nid = bytes(nid)
-        selection = "SELECT cid,title,digest,body FROM t_news WHERE nid = "+nid+";"
+        #nid = bytes(nid)
+        selection = "SELECT cid,title,digest,body FROM t_news WHERE nid = %d;" % nid
         q.exec_(selection)
         if q.first():        #读取cid，标题，摘要和正文
             self.cid = q.value(0).toInt()[0]
@@ -108,6 +239,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.body = self.ui.bodyedit.toPlainText() #已修改的文本
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
+        print type(self.nid)
         tuple2 = (self.cid, self.title, self.digest, self.body, self.nid)
         Model.update(self.ui.tableView.model(), tuple2)
     
@@ -138,6 +270,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 数据库连接
     
 
+    
+    
 """
 def createConnection():    
         db = QSqlDatabase.addDatabase("QMYSQL")
@@ -145,7 +279,7 @@ def createConnection():
         port = 3306
         database = "test"
         username = "root"
-        password = ""
+        password = "123456"
         db.setHostName(host)
         db.setPort(port)
         db.setDatabaseName(database)
@@ -167,6 +301,7 @@ class Model(QSqlTableModel):
         self.setTable("t_news")
         self.q = QSqlQuery()
         self.q.exec_("SELECT nid,cid,title FROM t_news;")
+        #self.q.exec_("SELECT nid,cid, title FROM t_news where cid = 1;")
         self.setQuery(self.q)
         self.select()
 
@@ -175,12 +310,15 @@ class Model(QSqlTableModel):
         mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
+        mainWindow.showtables()
+        #self.search()
         
-    def search(nid):
-        q.exec_("SELECT title,digest,body FROM t_news WHERE nid = "+nid+";")
+    
+
         
     def showdata(self):
         self.__init__()
+        mainWindow.showtables()
     def update(self,tuple2):
         update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s' WHERE nid = %d;" % tuple2
         flag2 = self.q.exec_(unicode(update))
