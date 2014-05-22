@@ -170,7 +170,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab4.setQuery(q)
         tab4.setFilter("cid = 4")
         tab4.select()
-        self.ui.tableView_4.setModel(tab1) 
+        self.ui.tableView_4.setModel(tab4) 
         self.ui.tableView_4.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_4.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_4.show()
