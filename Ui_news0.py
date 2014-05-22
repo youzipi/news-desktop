@@ -2,7 +2,11 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news0.ui'
 #
+<<<<<<< HEAD
 # Created: Sun May 18 21:14:51 2014
+=======
+# Created: Tue May 20 20:20:07 2014
+>>>>>>> dev3
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -147,7 +151,11 @@ class Ui_MainWindow(object):
         self.digestedit.setFont(font)
         self.digestedit.setObjectName(_fromUtf8("digestedit"))
         self.updatebutton = QtGui.QPushButton(self.centralWidget)
+<<<<<<< HEAD
         self.updatebutton.setGeometry(QtCore.QRect(700, 510, 80, 40))
+=======
+        self.updatebutton.setGeometry(QtCore.QRect(610, 510, 80, 40))
+>>>>>>> dev3
         self.updatebutton.setObjectName(_fromUtf8("updatebutton"))
         self.resetbutton = QtGui.QPushButton(self.centralWidget)
         self.resetbutton.setGeometry(QtCore.QRect(790, 510, 80, 40))
@@ -159,7 +167,11 @@ class Ui_MainWindow(object):
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
         self.line.setObjectName(_fromUtf8("line"))
         self.categorizebox_m = QtGui.QComboBox(self.centralWidget)
+<<<<<<< HEAD
         self.categorizebox_m.setGeometry(QtCore.QRect(590, 520, 69, 22))
+=======
+        self.categorizebox_m.setGeometry(QtCore.QRect(530, 510, 69, 22))
+>>>>>>> dev3
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("SimSun-ExtB"))
         font.setPointSize(10)
@@ -174,6 +186,12 @@ class Ui_MainWindow(object):
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.categorizebox_m.addItem(_fromUtf8(""))
+<<<<<<< HEAD
+=======
+        self.deletebutton = QtGui.QPushButton(self.centralWidget)
+        self.deletebutton.setGeometry(QtCore.QRect(700, 510, 80, 40))
+        self.deletebutton.setObjectName(_fromUtf8("deletebutton"))
+>>>>>>> dev3
         MainWindow.setCentralWidget(self.centralWidget)
         self.toolBar_2 = QtGui.QToolBar(MainWindow)
         self.toolBar_2.setObjectName(_fromUtf8("toolBar_2"))
@@ -207,7 +225,11 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
+<<<<<<< HEAD
         self.tabWidget.setCurrentIndex(1)
+=======
+        self.tabWidget.setCurrentIndex(4)
+>>>>>>> dev3
         QtCore.QObject.connect(self.tableView, QtCore.SIGNAL(_fromUtf8("doubleClicked(QModelIndex)")), MainWindow.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.urlLine, self.categorizebox_p)
@@ -268,6 +290,10 @@ class Ui_MainWindow(object):
         self.categorizebox_m.setItemText(3, _translate("MainWindow", "体育", None))
         self.categorizebox_m.setItemText(4, _translate("MainWindow", "文娱", None))
         self.categorizebox_m.setItemText(5, _translate("MainWindow", "科技", None))
+<<<<<<< HEAD
+=======
+        self.deletebutton.setText(_translate("MainWindow", "delete", None))
+>>>>>>> dev3
         self.toolBar_2.setWindowTitle(_translate("MainWindow", "toolBar_2", None))
         self.menu01.setTitle(_translate("MainWindow", "01", None))
         self.menu02.setTitle(_translate("MainWindow", "02", None))
