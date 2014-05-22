@@ -6,7 +6,7 @@ Module implementing MainWindow.
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
-#import urllib2,urllib,re
+
 from bs4 import BeautifulSoup
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtGui import *
@@ -14,10 +14,8 @@ from PyQt4.QtCore import pyqtSignature, QString
 from PyQt4.QtSql import *
 
 from Ui_news0 import Ui_MainWindow
-#from html2text import _DeHTMLParser, dehtml, txt2html
-#from text2html import *
 from spider import *
-#from SqlModel import Model
+
 
 QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
 QtCore.QTextCodec.setCodecForLocale ( QtCore.QTextCodec.codecForName("UTF-8"))
@@ -51,37 +49,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         网址输入
         """
         url = self.ui.urlLine.text()
-        print url
         url = str(url)
-        print ("ok_button realeased")
         self.ui.urlLine.setText("")
 
-        print self.ui.categorizebox_p.currentIndex()+1
         self.cid = self.ui.categorizebox_p.currentIndex()+1
         self.title, self.body = load(url)       #网页解析
         self.ui.titleedit.setPlainText(self.title)
         self.ui.bodyedit.setPlainText(self.body)
         q = QSqlQuery()
         r = self.ui.tableView.model().rowCount()
-        print "Model.rowCount():"
-        print r
-        print "index(r,0).data().toInt()"
         self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1
-        print self.nid
         tuple1 = (self.nid, self.cid, self.title , self.body , "1")
         Model.insert(self.ui.tableView.model(), tuple1)
-        #print "self.nidmax:"
-        #print self.nidmax
-
-
-    @pyqtSignature("")
-    def on_backbutton_released(self):
-        """
-        反向编辑
-        """
-        url = self.ui.testText.toPlainText()
-        print type(url)
-        self.ui.urlLine.setText(url)
 
     def showdata(self):
         q = QSqlQuery()
@@ -89,37 +68,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     @pyqtSignature("QModelIndex")
     def on_tableView_clicked(self, index):    #表格元素点击
-        print ("clicked")
         
         item = QStandardItem()
-        print type(item)
         row = index.row()
         column = index.column()
         self.ui.tableView.selectRow(row)
-        #print self.ui.tableView.item(row, column).text()
-        #print Model.data(Model.index(row, column)).text()
-        #print Model.index(row, 0).data().toInt()[0]
-        #print self.ui.tableView.selectionModel().model().index(row, 0).data().toInt()[0]
         self.nid = self.ui.tableView.model().index(row, 0).data().toInt()[0]
-        print "nid:"
-        print self.nid
         self.search(self.nid)
 
     def search(self, nid):
         q = QSqlQuery()
         nid = bytes(nid)
         selection = "SELECT cid,title,digest,body FROM t_news WHERE nid = "+nid+";"
-        print selection
         q.exec_(selection)
-        #print type(q)
         if q.first():        #读取cid，标题，摘要和正文
             self.cid = q.value(0).toInt()[0]
-            print type(self.cid)
+
             self.title = q.value(1).toString()
             self.digest = q.value(2).toString()
             self.body = q.value(3).toString()
-            #body.replace('<p>', '')
-            #body.replace('</p>', '')
         '''
         显示分类，标题，摘要和正文
         '''
@@ -143,17 +110,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.digest = self.ui.digestedit.toPlainText()
         tuple2 = (self.cid, self.title, self.digest, self.body, self.nid)
         Model.update(self.ui.tableView.model(), tuple2)
-        
-        
     
     @pyqtSignature("")
     def on_resetbutton_clicked(self):
         """
-        Slot documentation goes here.
+        重置编辑框中的内容：（标题，概要，正文）
         """
-        print ("reset Button clicked")
-        #search(nid)
-        print self.nid
+
         self.ui.titleedit.setPlainText(self.title)
         self.ui.digestedit.setPlainText(self.digest)
         self.ui.bodyedit.setPlainText(self.body)
@@ -161,10 +124,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSignature("")
     def on_deletebutton_clicked(self):
         Model.delete(self.ui.tableView.model(), self.nid)
+    @pyqtSignature("")
+    def on_actionAbout_triggered(self):
+        """
+        Slot documentation goes here.
+        """
+        QMessageBox.warning(None, u"About",u"Teemo news 桌面端")
+
+
 
 
 """
 数据库连接
+    
+
 """
 def createConnection():    
         db = QSqlDatabase.addDatabase("QMYSQL")
@@ -192,9 +165,6 @@ class Model(QSqlTableModel):
     def __init__(self, parent = None):
         QSqlTableModel.__init__(self, parent)
         self.setTable("t_news")
-
-        #print self.selectStatement()
-        #self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.q = QSqlQuery()
         self.q.exec_("SELECT nid,cid,title FROM t_news;")
         self.setQuery(self.q)
@@ -205,16 +175,16 @@ class Model(QSqlTableModel):
         mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
-        print "Model()"
+        
     def search(nid):
         q.exec_("SELECT title,digest,body FROM t_news WHERE nid = "+nid+";")
+        
     def showdata(self):
         self.__init__()
     def update(self,tuple2):
         update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s' WHERE nid = %d;" % tuple2
         flag2 = self.q.exec_(unicode(update))
-        print flag2
-        print ("update succeed")
+
         if flag2 == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
@@ -225,9 +195,7 @@ class Model(QSqlTableModel):
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
         flag = self.q.exec_(unicode(insert))
-        #print unicode(insert)
-        print flag
-        print ("insert succeed")
+
         if flag == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
@@ -237,8 +205,7 @@ class Model(QSqlTableModel):
     def delete(self,nid):
         delete = "DELETE FROM t_news WHERE nid = %d;" % nid
         flag3 = self.q.exec_(unicode(delete))
-        print flag3
-        print ("delete succeed")
+
         if flag3 == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
@@ -246,7 +213,6 @@ class Model(QSqlTableModel):
         self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.showdata()
             
-
 
 if __name__ == '__main__':
     import sys
