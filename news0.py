@@ -142,7 +142,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab1.setFilter("cid = 1")
         tab1.select()
         self.ui.tableView_1.setModel(tab1) 
-        self.ui.tableView_1.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_1.setColumnHidden(0,True) 
         self.ui.tableView_1.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_1.show()
         
@@ -151,7 +151,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab2.setFilter("cid = 2")
         tab2.select()
         self.ui.tableView_2.setModel(tab2) 
-        self.ui.tableView_2.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_2.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_2.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_2.show()
         
@@ -161,7 +161,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab3.setFilter("cid = 3")
         tab3.select()
         self.ui.tableView_3.setModel(tab3) 
-        self.ui.tableView_3.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_3.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_3.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_3.show()
         
@@ -171,7 +171,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab4.setFilter("cid = 4")
         tab4.select()
         self.ui.tableView_4.setModel(tab1) 
-        self.ui.tableView_4.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_4.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_4.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_4.show()
         
@@ -181,7 +181,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab5.setFilter("cid = 5")
         tab5.select()
         self.ui.tableView_5.setModel(tab5) 
-        self.ui.tableView_5.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_5.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_5.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_5.show()
         
@@ -191,7 +191,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         tab6.setFilter("cid = 6")
         tab6.select()
         self.ui.tableView_6.setModel(tab6) 
-        self.ui.tableView_6.resizeColumnToContents(0) #tableview列自适应宽度
+        self.ui.tableView_6.setColumnHidden(0,True) #tableview列自适应宽度
         self.ui.tableView_6.resizeColumnToContents(1) #tableview列自适应宽度
         self.ui.tableView_6.show()
         
@@ -306,8 +306,10 @@ class Model(QSqlTableModel):
         self.select()
 
         mainWindow.ui.tableView.setModel(self)
-        mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
-        mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
+        #mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
+        #mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
+        mainWindow.ui.tableView.setColumnHidden(0,True) #tableview列自适应宽度
+        mainWindow.ui.tableView.setColumnHidden(1,True) #tableview列自适应宽度
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
         mainWindow.showtables()
