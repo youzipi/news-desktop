@@ -10,11 +10,20 @@ sys.setdefaultencoding('utf-8')
 
 def load(url):
     try:
-        html = urllib2.urlopen(url).read()
+        if('shtml' in url):
+            html = urllib.urlopen(url).read()
+        else:
+            html = urllib2.urlopen(url).read()
+        #print html.decode('GBK','ignore').encode("utf-8")
+        #print html#.decode('utf-8').encode('gb2312')
+        #print body
     except(urllib2.HTTPError):
         return 0
     soup = BeautifulSoup(html,from_encoding='GB18030')
+    #print soup
     title = soup.head.title
+    #title = soup.title
+    #print title
     #print type(title)   #<class 'bs4.element.Tag'>
     #print title.string
     #print type(title.string)   #<class 'bs4.element.NavigableString'>
@@ -48,7 +57,8 @@ def load(url):
     
 #url = "http://www.tuicool.com/articles/Fruiqyj"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
-#url = "http://news.163.com/14/0516/22/9SDAH8JQ00014JB5.html"
+#url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
+#url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
 
 #title,body = load(url)
 #print title

@@ -7,7 +7,6 @@ import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
 
-from bs4 import BeautifulSoup
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtGui import *
 from PyQt4.QtCore import pyqtSignature, QString
@@ -52,7 +51,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         url = str(url)
         self.ui.urlLine.setText("")
 
-        self.cid = self.ui.categorizebox_p.currentIndex()+1
+        #self.cid = self.ui.categorizebox_p.currentIndex()+1
         self.title, self.body = load(url)       #网页解析
         self.ui.titleedit.setPlainText(self.title)
         self.ui.bodyedit.setPlainText(self.body)
