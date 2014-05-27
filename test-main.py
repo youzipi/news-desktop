@@ -49,6 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         网址输入
         """
+        print "ok_button_released"
         url = self.ui.urlLine.text()
         url = str(url)
         self.ui.urlLine.setText("")
@@ -69,7 +70,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     @pyqtSignature("QModelIndex")
     def on_tableView_clicked(self, index):    #表格元素点击
-        
+        print "tableview_clicked"
         item = QStandardItem()
         row = index.row()
         column = index.column()
@@ -79,6 +80,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
     @pyqtSignature("QModelIndex")
     def on_tableView_1_clicked(self, index):
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_1.selectRow(row)
         self.nid = self.ui.tableView_1.model().index(row, 0).data().toInt()[0]
@@ -86,6 +88,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
     @pyqtSignature("QModelIndex")
     def on_tableView_2_clicked(self, index):
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_2.selectRow(row)
         self.nid = self.ui.tableView_2.model().index(row, 0).data().toInt()[0]
@@ -93,6 +96,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSignature("QModelIndex")
     def on_tableView_3_clicked(self, index):
+        print "tableview_clicked"
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_3.selectRow(row)
         self.nid = self.ui.tableView_3.model().index(row, 0).data().toInt()[0]
@@ -100,18 +105,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
     @pyqtSignature("QModelIndex")
     def on_tableView_4_clicked(self, index):
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_4.selectRow(row)
         self.nid = self.ui.tableView_4.model().index(row, 0).data().toInt()[0]
         self.search(self.nid)
     @pyqtSignature("QModelIndex")
     def on_tableView_5_clicked(self, index):
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_5.selectRow(row)
         self.nid = self.ui.tableView_5.model().index(row, 0).data().toInt()[0]
         self.search(self.nid)
     @pyqtSignature("QModelIndex")
     def on_tableView_6_clicked(self, index):
+        print "tableview_clicked"
         row = index.row()
         self.ui.tableView_6.selectRow(row)
         self.nid = self.ui.tableView_6.model().index(row, 0).data().toInt()[0]
@@ -121,6 +129,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
      
     def showtables(self):
+        print "show tables"
         tab1 = QSqlTableModel()
         tab2 = QSqlTableModel()
         tab3 = QSqlTableModel()
@@ -271,8 +280,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 数据库连接
     
 
-    
-    
 """
 def createConnection():    
         db = QSqlDatabase.addDatabase("QMYSQL")
@@ -325,6 +332,7 @@ class Model(QSqlTableModel):
     def update(self,tuple2):
         update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s' WHERE nid = %d;" % tuple2
         flag2 = self.q.exec_(unicode(update))
+        print update
 
         if flag2 == False: 
             print self.q.lastError()
@@ -336,6 +344,7 @@ class Model(QSqlTableModel):
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
         flag = self.q.exec_(unicode(insert))
+        print insert
 
         if flag == False: 
             print self.q.lastError()
@@ -346,6 +355,7 @@ class Model(QSqlTableModel):
     def delete(self,nid):
         delete = "DELETE FROM t_news WHERE nid = %d;" % nid
         flag3 = self.q.exec_(unicode(delete))
+        print insert
 
         if flag3 == False: 
             print self.q.lastError()

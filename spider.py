@@ -33,6 +33,7 @@ def load(url):
     t = soup.find_all("p")
     count = 0
     text = ""
+    #print type(text)
     for i in t:
         #print count
         body = str(i.string)
@@ -50,6 +51,7 @@ def load(url):
 
     #print "count:%d" % count
     #print body
+    #print type(text)
     return title, text
 
     
@@ -59,7 +61,9 @@ def load(url):
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
+#url = ""
 
+#print type(load(url)[0])
 #title,body = load(url)
 #print title
 #print body
