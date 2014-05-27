@@ -64,7 +64,7 @@
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>0</number>
     </property>
     <property name="elideMode">
      <enum>Qt::ElideNone</enum>
@@ -412,7 +412,7 @@
      <string>请拖拽网页链接到此处：</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>30</x>

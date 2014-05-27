@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news0.ui'
 #
-# Created: Wed May 21 22:11:03 2014
+# Created: Tue May 27 21:11:44 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -171,17 +171,17 @@ class Ui_MainWindow(object):
         self.label = QtGui.QLabel(self.centralWidget)
         self.label.setGeometry(QtCore.QRect(30, 10, 151, 20))
         self.label.setObjectName(_fromUtf8("label"))
-        self.widget = QtGui.QWidget(self.centralWidget)
-        self.widget.setGeometry(QtCore.QRect(30, 30, 361, 25))
-        self.widget.setObjectName(_fromUtf8("widget"))
-        self.horizontalLayout = QtGui.QHBoxLayout(self.widget)
+        self.layoutWidget = QtGui.QWidget(self.centralWidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(30, 30, 361, 25))
+        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setMargin(0)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.urlLine = QtGui.QLineEdit(self.widget)
+        self.urlLine = QtGui.QLineEdit(self.layoutWidget)
         self.urlLine.setText(_fromUtf8(""))
         self.urlLine.setObjectName(_fromUtf8("urlLine"))
         self.horizontalLayout.addWidget(self.urlLine)
-        self.okbutton = QtGui.QPushButton(self.widget)
+        self.okbutton = QtGui.QPushButton(self.layoutWidget)
         self.okbutton.setObjectName(_fromUtf8("okbutton"))
         self.horizontalLayout.addWidget(self.okbutton)
         MainWindow.setCentralWidget(self.centralWidget)
@@ -202,7 +202,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(6)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QObject.connect(self.tableView, QtCore.SIGNAL(_fromUtf8("doubleClicked(QModelIndex)")), MainWindow.show)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.urlLine, self.okbutton)
