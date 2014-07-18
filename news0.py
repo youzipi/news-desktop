@@ -13,6 +13,7 @@ from PyQt4.QtCore import pyqtSignature, QString
 from PyQt4.QtSql import *
 
 from Ui_news0 import Ui_MainWindow
+from Ui_news1 import Ui_MainWindow
 from spider import *
 
 
@@ -33,6 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         #print type(self)
         QMainWindow.__init__(self, parent)
+        #QMainWindow.setStyle()
         self.ui = Ui_MainWindow()
         #print type(self.ui)
         self.ui.setupUi(self)
@@ -359,6 +361,7 @@ if __name__ == '__main__':
     import sys
 
     app = QtGui.QApplication(sys.argv)
+    #app.setStyle("cleanlooks")
 
     mainWindow = MainWindow()
     mainWindow.show()    #显示主窗口  

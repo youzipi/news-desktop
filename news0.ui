@@ -116,6 +116,8 @@
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>tableView_1</zorder>
+     <zorder>groupBox_2</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -140,6 +142,8 @@
        <bool>true</bool>
       </property>
      </widget>
+     <zorder>tableView_2</zorder>
+     <zorder>formLayoutWidget</zorder>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -418,7 +422,7 @@
       <x>30</x>
       <y>30</y>
       <width>361</width>
-      <height>25</height>
+      <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -437,6 +441,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QSplitter" name="splitter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>0</width>
+      <height>0</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
