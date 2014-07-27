@@ -26,7 +26,7 @@ QtCore.QTextCodec.setCodecForLocale ( QtCore.QTextCodec.codecForName("UTF-8"))
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """
-    Class documentation goes here.
+    Class documentation
     """
     def __init__(self, parent = None):
         """

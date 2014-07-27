@@ -60,31 +60,28 @@ def load(url):
         else:
             body = body.decode('utf-8')#.encode('gb2312')
             body = i
-            print i
-        #print body
+            print "body:"
+            #print body
             ##text  = text+body+"\n"
-            text  = text+str(body)
-        #s = raw_input()
-        #print text.decode('utf-8')
-        #count+=1
+            text  = text+str(i)
 
 
     print "count:%d" % count
-    #print body
+    print text
     print type(text)
     return title, text
 
     
     
     
-url = "http://www.36kr.com/p/213937.html"
+#url = "http://www.36kr.com/p/213937.html"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
 #url = ""
 
-#print type(load(url)[0])
-title,body = load(url)
-print title
-print body
+
+#title,body = load(url)
+#print title
+#print body
 #print body#.decode('utf-8').encode('gbk')
