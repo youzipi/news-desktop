@@ -12,7 +12,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import pyqtSignature, QString
 from PyQt4.QtSql import *
 
-from Ui_news0 import Ui_MainWindow
+#from Ui_news0 import Ui_MainWindow
 from Ui_news1 import Ui_MainWindow
 from spider import *
 
@@ -58,7 +58,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #self.cid = self.ui.categorizebox_p.currentIndex()+1
         self.title, self.body = load(url)       #网页解析
         self.ui.titleedit.setPlainText(self.title)
-        self.ui.bodyedit.setPlainText(self.body)
+        #self.ui.bodyedit.setPlainText(self.body)
+        self.ui.bodyedit.setHtml(self.body)
         q = QSqlQuery()
         r = self.ui.tableView.model().rowCount()  
         self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1 #获取插入位置
@@ -226,7 +227,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         '''
         self.ui.titleedit.setPlainText(self.title)
         self.ui.digestedit.setPlainText(self.digest)
-        self.ui.bodyedit.setPlainText(self.body)
+        #self.ui.bodyedit.setPlainText(self.body)
+        #print self.body
+        self.ui.bodyedit.setHtml(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
 
 
@@ -254,7 +257,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.ui.titleedit.setPlainText(self.title)
         self.ui.digestedit.setPlainText(self.digest)
-        self.ui.bodyedit.setPlainText(self.body)
+        #self.ui.bodyedit.setPlainText(self.body)
+        self.ui.bodyedit.setHtml(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
     @pyqtSignature("")
     def on_deletebutton_clicked(self):

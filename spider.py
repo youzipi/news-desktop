@@ -31,40 +31,60 @@ def load(url):
     #print "title:"+title
     #print type(title)
     t = soup.find_all("p")
-    count = 0
+    print "t:\n"
+    #print t
+    #img = t.find_all("img")
+    print "img:\n"
+    #print img
     text = ""
+    dirname = "D:/Desktop/img/"
+    count= 0
     #print type(text)
     for i in t:
         #print count
         body = str(i.string)
+        #print body
         if body == "None":
-            body = "\n"
-            text  = text+body
+            if i.find('img'):
+                print i
+                src = i.find('img')['src']
+                print src
+                filename = dirname+str(count)+".png"
+                print filename
+                try:    
+                    urllib.urlretrieve(src, filename)
+                    count = count+1
+                except:     #图片无法下载
+                    continue
+            text = text+str(i)
         else:
             body = body.decode('utf-8')#.encode('gb2312')
+            body = i
+            print i
         #print body
-            text  = text+body+"\n"
+            ##text  = text+body+"\n"
+            text  = text+str(body)
         #s = raw_input()
         #print text.decode('utf-8')
-        count+=1
+        #count+=1
 
 
-    #print "count:%d" % count
+    print "count:%d" % count
     #print body
-    #print type(text)
+    print type(text)
     return title, text
 
     
     
     
-#url = "http://www.tuicool.com/articles/Fruiqyj"
+url = "http://www.36kr.com/p/213937.html"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
 #url = ""
 
 #print type(load(url)[0])
-#title,body = load(url)
-#print title
-#print body
-    
+title,body = load(url)
+print title
+print body
+#print body#.decode('utf-8').encode('gbk')
