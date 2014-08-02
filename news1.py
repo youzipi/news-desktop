@@ -14,7 +14,7 @@ from PyQt4.QtSql import *
 
 #from Ui_news0 import Ui_MainWindow
 from Ui_news1 import Ui_MainWindow
-from Ui_mysql import Ui_Dialog
+from Ui_setting import Ui_Dialog
 from spider import *
 
 
@@ -22,13 +22,15 @@ QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
 QtCore.QTextCodec.setCodecForLocale ( QtCore.QTextCodec.codecForName("UTF-8"))
 
 
-
+class dlgSetting(QDialog, Ui_Dialog):
+    def __init__(self, parent = None):
+        QDialog.__init__(self, parent)
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)     
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    """
-    Class documentation
-    """
+    
     def __init__(self, parent = None):
         """
         Constructor
@@ -270,12 +272,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         QMessageBox.about(None, u"About",u"Teemo news 桌面端")
-
+    @pyqtSignature("")
     def on_actionSetting_triggered(self):
         """
         Slot documentation goes here.
         """
-        QMessageBox.about(None, u"About",u"Teemo news 桌面端")
+        #QMessageBox.about(None, u"About",u"Teemo news 桌面端")
+        dialog = dlgSetting()
+        dialog.exec_()    #显示主窗口  
+        
 
 
 

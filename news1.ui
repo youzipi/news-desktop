@@ -151,7 +151,7 @@ font: 10pt &quot;Arial&quot;;</string>
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <property name="elideMode">
              <enum>Qt::ElideNone</enum>
@@ -369,7 +369,7 @@ font: 10pt &quot;Arial&quot;;</string>
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
+         <width>450</width>
          <height>0</height>
         </size>
        </property>
@@ -454,6 +454,9 @@ font: 10pt &quot;Arial&quot;;</string>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
+          </property>
           <item>
            <widget class="QLabel" name="label_2">
             <property name="sizePolicy">
@@ -529,6 +532,18 @@ font: 10pt &quot;Arial&quot;;</string>
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>星标</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -538,16 +553,31 @@ font: 10pt &quot;Arial&quot;;</string>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>0</width>
-              <height>0</height>
+              <width>13</width>
+              <height>13</height>
              </size>
             </property>
            </spacer>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetFixedSize</enum>
+            </property>
             <item>
              <widget class="QPushButton" name="updatebutton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>31</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: #3e5706;
 background: #a5cd4e;
@@ -561,6 +591,18 @@ font: 15pt &quot;Arial&quot;;
             </item>
             <item>
              <widget class="QPushButton" name="deletebutton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>31</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">color:#CC0000;
 background:#FF6600;
@@ -574,6 +616,18 @@ font: 15pt &quot;Arial&quot;;
             </item>
             <item>
              <widget class="QPushButton" name="resetbutton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>31</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: #19667d;
 background: #70c9e3;
@@ -614,6 +668,7 @@ font: 75 16pt &quot;Arial&quot;;</string>
     <property name="title">
      <string>Setting</string>
     </property>
+    <addaction name="actionSetting"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menuAbout"/>
@@ -622,6 +677,11 @@ font: 75 16pt &quot;Arial&quot;;</string>
   <action name="actionAbout">
    <property name="text">
     <string>about</string>
+   </property>
+  </action>
+  <action name="actionSetting">
+   <property name="text">
+    <string>setting</string>
    </property>
   </action>
  </widget>

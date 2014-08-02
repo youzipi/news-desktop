@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news1.ui'
 #
-# Created: Fri Jul 18 20:04:22 2014
+# Created: Sun Aug 03 04:06:10 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -174,7 +174,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addLayout(self.verticalLayout_2)
         self.groupBox_2 = QtGui.QGroupBox(self.splitter)
         self.groupBox_2.setEnabled(True)
-        self.groupBox_2.setMinimumSize(QtCore.QSize(200, 0))
+        self.groupBox_2.setMinimumSize(QtCore.QSize(450, 0))
         self.groupBox_2.setStyleSheet(_fromUtf8(""))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.groupBox_2)
@@ -215,6 +215,7 @@ class Ui_MainWindow(object):
         self.bodyedit.setObjectName(_fromUtf8("bodyedit"))
         self.verticalLayout_3.addWidget(self.bodyedit)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
+        self.horizontalLayout_3.setSizeConstraint(QtGui.QLayout.SetFixedSize)
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.label_2 = QtGui.QLabel(self.groupBox_2)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
@@ -244,11 +245,24 @@ class Ui_MainWindow(object):
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.horizontalLayout_3.addWidget(self.categorizebox_m)
-        spacerItem1 = QtGui.QSpacerItem(0, 0, QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Minimum)
+        self.checkBox = QtGui.QCheckBox(self.groupBox_2)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.checkBox.setFont(font)
+        self.checkBox.setObjectName(_fromUtf8("checkBox"))
+        self.horizontalLayout_3.addWidget(self.checkBox)
+        spacerItem1 = QtGui.QSpacerItem(13, 13, QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setSizeConstraint(QtGui.QLayout.SetFixedSize)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.updatebutton = QtGui.QPushButton(self.groupBox_2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.updatebutton.sizePolicy().hasHeightForWidth())
+        self.updatebutton.setSizePolicy(sizePolicy)
+        self.updatebutton.setMinimumSize(QtCore.QSize(75, 31))
         self.updatebutton.setStyleSheet(_fromUtf8("color: #3e5706;\n"
 "background: #a5cd4e;\n"
 "font: 15pt \"Arial\";\n"
@@ -256,6 +270,12 @@ class Ui_MainWindow(object):
         self.updatebutton.setObjectName(_fromUtf8("updatebutton"))
         self.horizontalLayout_2.addWidget(self.updatebutton)
         self.deletebutton = QtGui.QPushButton(self.groupBox_2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.deletebutton.sizePolicy().hasHeightForWidth())
+        self.deletebutton.setSizePolicy(sizePolicy)
+        self.deletebutton.setMinimumSize(QtCore.QSize(75, 31))
         self.deletebutton.setStyleSheet(_fromUtf8("color:#CC0000;\n"
 "background:#FF6600;\n"
 "font: 15pt \"Arial\";\n"
@@ -263,6 +283,12 @@ class Ui_MainWindow(object):
         self.deletebutton.setObjectName(_fromUtf8("deletebutton"))
         self.horizontalLayout_2.addWidget(self.deletebutton)
         self.resetbutton = QtGui.QPushButton(self.groupBox_2)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.resetbutton.sizePolicy().hasHeightForWidth())
+        self.resetbutton.setSizePolicy(sizePolicy)
+        self.resetbutton.setMinimumSize(QtCore.QSize(75, 31))
         self.resetbutton.setStyleSheet(_fromUtf8("color: #19667d;\n"
 "background: #70c9e3;\n"
 "font: 15pt \"\";\n"
@@ -286,12 +312,15 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.actionAbout = QtGui.QAction(MainWindow)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        self.actionSetting = QtGui.QAction(MainWindow)
+        self.actionSetting.setObjectName(_fromUtf8("actionSetting"))
         self.menuAbout.addAction(self.actionAbout)
+        self.menu.addAction(self.actionSetting)
         self.menubar.addAction(self.menu.menuAction())
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -314,12 +343,14 @@ class Ui_MainWindow(object):
         self.categorizebox_m.setItemText(3, _translate("MainWindow", "体育", None))
         self.categorizebox_m.setItemText(4, _translate("MainWindow", "文娱", None))
         self.categorizebox_m.setItemText(5, _translate("MainWindow", "科技", None))
+        self.checkBox.setText(_translate("MainWindow", "星标", None))
         self.updatebutton.setText(_translate("MainWindow", "update", None))
         self.deletebutton.setText(_translate("MainWindow", "delete", None))
         self.resetbutton.setText(_translate("MainWindow", "reset", None))
         self.menuAbout.setTitle(_translate("MainWindow", "About", None))
         self.menu.setTitle(_translate("MainWindow", "Setting", None))
         self.actionAbout.setText(_translate("MainWindow", "about", None))
+        self.actionSetting.setText(_translate("MainWindow", "setting", None))
 
 
 if __name__ == "__main__":
