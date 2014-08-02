@@ -17,6 +17,7 @@ from PyQt4.QtSql import *
 from Ui_news1 import Ui_MainWindow
 from Ui_setting import Ui_Dialog
 from spider import *
+from imgzip import *
 
 
 QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
@@ -44,7 +45,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #print type(self.ui)
         self.ui.setupUi(self)
         
-        self.nid = 0
+        self.nid = 1
         self.cid = 1
         self.title = ""       
         self.digest = ""       
@@ -61,7 +62,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.urlLine.setText("")
 
         #self.cid = self.ui.categorizebox_p.currentIndex()+1
-        self.title, self.body = load(url)       #网页解析
+        self.title, self.body, self.imgsrc = load(url)       #**********网页解析********
+        if self.imgsrc:
+            imgzip(self.imgsrc)      #图片压缩
         self.ui.titleedit.setPlainText(self.title)
         #self.ui.bodyedit.setPlainText(self.body)
         self.ui.bodyedit.setHtml(self.body)
@@ -71,7 +74,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         ptime = time.strftime('%Y-%m-%d',time.localtime(time.time()))  #
         
         stared = 0
-        tuple1 = (self.nid, self.cid, self.title , self.body , ptime, stared)
+        tuple1 = (self.nid, self.cid, self.title , self.body , ptime, self.imgsrc, stared)
         Model.insert(self.ui.tableView.model(), tuple1)
 
     def showdata(self):
@@ -253,7 +256,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Slot documentation goes here.
         """
         self.cid = self.ui.categorizebox_m.currentIndex()+1
-        self.body = self.ui.bodyedit.toPlainText() #已修改的文本
+        #self.body = self.ui.bodyedit.toPlainText() #已修改的文本
+        self.body = self.ui.bodyedit.toHtml() #已修改的文本
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
         self.stared = self.ui.starbox.checkState() / 2
@@ -336,10 +340,8 @@ class Model(QSqlTableModel):
         self.select()
 
         mainWindow.ui.tableView.setModel(self)
-        #mainWindow.ui.tableView.resizeColumnToContents(0) #tableview列自适应宽度
-        #mainWindow.ui.tableView.resizeColumnToContents(1) #tableview列自适应宽度
-        mainWindow.ui.tableView.setColumnHidden(0,True) #tableview列自适应宽度
-        mainWindow.ui.tableView.setColumnHidden(1,True) #tableview列自适应宽度
+        mainWindow.ui.tableView.setColumnHidden(0,True) #隐藏cid，nid
+        mainWindow.ui.tableView.setColumnHidden(1,True) #
         mainWindow.ui.tableView.resizeColumnToContents(2) #tableview列自适应宽度
         mainWindow.ui.tableView.show()
         mainWindow.showtables()
@@ -364,7 +366,7 @@ class Model(QSqlTableModel):
         self.showdata()
         
     def insert(self, tuple1):
-        insert = "insert into t_news (nid,cid,title,body,ptime,deleted) values (%d,%d,'%s','%s','%s',%d);" % tuple1
+        insert = "insert into t_news (nid,cid,title,body,ptime,imgsrc, deleted) values (%d,%d,'%s','%s','%s','%s',%d);" % tuple1
         flag = self.q.exec_(unicode(insert))
 
         if flag == False: 
