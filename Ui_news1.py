@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news1.ui'
 #
-# Created: Sun Aug 03 04:06:10 2014
+# Created: Sun Aug 03 04:58:33 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -245,12 +245,12 @@ class Ui_MainWindow(object):
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.categorizebox_m.addItem(_fromUtf8(""))
         self.horizontalLayout_3.addWidget(self.categorizebox_m)
-        self.checkBox = QtGui.QCheckBox(self.groupBox_2)
+        self.starbox = QtGui.QCheckBox(self.groupBox_2)
         font = QtGui.QFont()
         font.setPointSize(12)
-        self.checkBox.setFont(font)
-        self.checkBox.setObjectName(_fromUtf8("checkBox"))
-        self.horizontalLayout_3.addWidget(self.checkBox)
+        self.starbox.setFont(font)
+        self.starbox.setObjectName(_fromUtf8("starbox"))
+        self.horizontalLayout_3.addWidget(self.starbox)
         spacerItem1 = QtGui.QSpacerItem(13, 13, QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
@@ -343,7 +343,7 @@ class Ui_MainWindow(object):
         self.categorizebox_m.setItemText(3, _translate("MainWindow", "体育", None))
         self.categorizebox_m.setItemText(4, _translate("MainWindow", "文娱", None))
         self.categorizebox_m.setItemText(5, _translate("MainWindow", "科技", None))
-        self.checkBox.setText(_translate("MainWindow", "星标", None))
+        self.starbox.setText(_translate("MainWindow", "星标", None))
         self.updatebutton.setText(_translate("MainWindow", "update", None))
         self.deletebutton.setText(_translate("MainWindow", "delete", None))
         self.resetbutton.setText(_translate("MainWindow", "reset", None))

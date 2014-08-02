@@ -6,6 +6,7 @@ Module implementing MainWindow.
 import sys
 reload(sys)
 sys.setdefaultencoding('UTF-8')
+import time
 
 from PyQt4 import QtGui,QtCore
 from PyQt4.QtGui import *
@@ -26,7 +27,8 @@ class dlgSetting(QDialog, Ui_Dialog):
     def __init__(self, parent = None):
         QDialog.__init__(self, parent)
         self.ui = Ui_Dialog()
-        self.ui.setupUi(self)     
+        self.ui.setupUi(self)
+        
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -66,7 +68,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         q = QSqlQuery()
         r = self.ui.tableView.model().rowCount()  
         self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1 #获取插入位置
-        tuple1 = (self.nid, self.cid, self.title , self.body , "1")
+        ptime = time.strftime('%Y-%m-%d',time.localtime(time.time()))  #
+        
+        stared = 0
+        tuple1 = (self.nid, self.cid, self.title , self.body , ptime, stared)
         Model.insert(self.ui.tableView.model(), tuple1)
 
     def showdata(self):
@@ -217,7 +222,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def search(self, nid):
         q = QSqlQuery()
         #nid = bytes(nid)
-        selection = "SELECT cid,title,digest,body FROM t_news WHERE nid = %d;" % nid
+        selection = "SELECT cid,title,digest,body,deleted FROM t_news WHERE nid = %d;" % nid
         q.exec_(selection)
         if q.first():        #读取cid，标题，摘要和正文
             self.cid = q.value(0).toInt()[0]
@@ -225,6 +230,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.title = q.value(1).toString()
             self.digest = q.value(2).toString()
             self.body = q.value(3).toString()
+            self.stared = q.value(4).toInt()[0]*2 #0 -- 未选中 2 -- 选中
+
         '''
         显示分类，标题，摘要和正文
         '''
@@ -234,12 +241,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #print self.body
         self.ui.bodyedit.setHtml(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
+        self.ui.starbox.setCheckState(self.stared)
 
 
     '''
     数据库更新
     '''
-    @pyqtSignature("")
+    @pyqtSignature("")#
     def on_updatebutton_clicked(self):
         """
         Slot documentation goes here.
@@ -248,8 +256,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.body = self.ui.bodyedit.toPlainText() #已修改的文本
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
-        print type(self.nid)
-        tuple2 = (self.cid, self.title, self.digest, self.body, self.nid)
+        self.stared = self.ui.starbox.checkState() / 2
+        print "self.stared"
+        print self.stared
+        tuple2 = (self.cid, self.title, self.digest, self.body, self.stared, self.nid)
         Model.update(self.ui.tableView.model(), tuple2)
     
     @pyqtSignature("")
@@ -263,9 +273,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #self.ui.bodyedit.setPlainText(self.body)
         self.ui.bodyedit.setHtml(self.body)
         self.ui.categorizebox_m.setCurrentIndex(self.cid-1)
+        self.ui.starbox.setCheckState(self.stared)
     @pyqtSignature("")
     def on_deletebutton_clicked(self):
         Model.delete(self.ui.tableView.model(), self.nid)
+        
     @pyqtSignature("")
     def on_actionAbout_triggered(self):
         """
@@ -340,7 +352,8 @@ class Model(QSqlTableModel):
         self.__init__()
         mainWindow.showtables()
     def update(self,tuple2):
-        update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s' WHERE nid = %d;" % tuple2
+        update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s',deleted = %d WHERE nid = %d;" % tuple2
+        print tuple2
         flag2 = self.q.exec_(unicode(update))
 
         if flag2 == False: 
@@ -351,7 +364,7 @@ class Model(QSqlTableModel):
         self.showdata()
         
     def insert(self, tuple1):
-        insert = "insert into t_news (nid,cid,title,body,ptime) values (%d,%d,'%s','%s','%s');" % tuple1
+        insert = "insert into t_news (nid,cid,title,body,ptime,deleted) values (%d,%d,'%s','%s','%s',%d);" % tuple1
         flag = self.q.exec_(unicode(insert))
 
         if flag == False: 
