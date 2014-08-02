@@ -38,19 +38,24 @@ def load(url):
     #print img
     text = ""
     dirname = "D:/Desktop/img/"
+    filename = ""
     count= 0
     #print type(text)
     for i in t:
+        #print "count"
         #print count
         body = str(i.string)
         #print body
         if body == "None":
-            if i.find('img'):
-                print i
+            if count == 0 and i.find('img'):
+                #print i
                 src = i.find('img')['src']
-                print src
-                filename = dirname+str(count)+".png"
-                print filename
+                number = src[-10:-4]
+                filename = dirname+number+".jpg"
+                #print "filename:"
+                i.find('img')['src'] = filename #更改路径
+                print i
+                #print filename
                 try:    
                     urllib.urlretrieve(src, filename)
                     count = count+1
@@ -60,16 +65,16 @@ def load(url):
         else:
             body = body.decode('utf-8')#.encode('gb2312')
             body = i
-            print "body:"
+            #print "body:"
             #print body
             ##text  = text+body+"\n"
             text  = text+str(i)
 
 
     print "count:%d" % count
-    print text
-    print type(text)
-    return title, text
+    #print text
+    #print type(text)
+    return title, text, filename
 
     
     
@@ -78,10 +83,12 @@ def load(url):
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
-#url = ""
+#url = "http://www.36kr.com/p/214277.html"
+#url = "http://news.ts.cn/content/2014-08/02/content_10291681.htm"
 
 
-#title,body = load(url)
+#title,body,imgsrc = load(url)
+#print imgsrc
 #print title
 #print body
 #print body#.decode('utf-8').encode('gbk')
