@@ -250,7 +250,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     '''
     数据库更新
     '''
-    @pyqtSignature("")#
+    @pyqtSignature("")
     def on_updatebutton_clicked(self):
         """
         Slot documentation goes here.
@@ -258,6 +258,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.cid = self.ui.categorizebox_m.currentIndex()+1
         #self.body = self.ui.bodyedit.toPlainText() #已修改的文本
         self.body = self.ui.bodyedit.toHtml() #已修改的文本
+        self.body.replace("'","\\'")
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
         self.stared = self.ui.starbox.checkState() / 2
@@ -368,7 +369,7 @@ class Model(QSqlTableModel):
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime,imgsrc, deleted) values (%d,%d,'%s','%s','%s','%s',%d);" % tuple1
         flag = self.q.exec_(unicode(insert))
-
+        print tuple1
         if flag == False: 
             print self.q.lastError()
             print (self.q.lastError().text())

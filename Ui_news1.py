@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news1.ui'
 #
-# Created: Sun Aug 03 04:58:33 2014
+# Created: Sun Aug 03 07:17:50 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
