@@ -582,6 +582,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <string notr="true">color: #3e5706;
 background: #a5cd4e;
 font: 15pt &quot;Arial&quot;;
+padding:5px 0;
+
    </string>
               </property>
               <property name="text">
@@ -607,6 +609,7 @@ font: 15pt &quot;Arial&quot;;
                <string notr="true">color:#CC0000;
 background:#FF6600;
 font: 15pt &quot;Arial&quot;;
+padding:5px 0;
 </string>
               </property>
               <property name="text">
@@ -631,7 +634,6 @@ font: 15pt &quot;Arial&quot;;
               <property name="styleSheet">
                <string notr="true">color: #19667d;
 background: #70c9e3;
-font: 15pt &quot;&quot;;
 font: 75 16pt &quot;Arial&quot;;</string>
               </property>
               <property name="text">

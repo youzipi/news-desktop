@@ -38,6 +38,8 @@ def load(url):
     #print img
     text = ""
     dirname = "D:/Desktop/img/"
+    #dirname = "E:\百度"
+    dirname=unicode(dirname,"utf8")#.encode("utf-8")
     filename = ""
     count= 0
     #print type(text)
