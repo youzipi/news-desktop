@@ -62,9 +62,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.urlLine.setText("")
 
         #self.cid = self.ui.categorizebox_p.currentIndex()+1
-        self.title, self.body, self.imgsrc = load(url)       #**********网页解析********
-        if self.imgsrc:
-            imgzip(self.imgsrc)      #图片压缩
+        self.title, self.body, self.imgsrc,self.filename = load(url)       #**********网页解析********
+        print "self.imgsrc:"
+        print self.imgsrc
+        print "self.filename:"
+        print self.filename
+        #self.filename = unicode(self.filename,"utf8")
+        #print self.filename
+        if self.filename:
+            imgzip(self.filename)      #图片压缩
         self.ui.titleedit.setPlainText(self.title)
         #self.ui.bodyedit.setPlainText(self.body)
         self.ui.bodyedit.setHtml(self.body)
