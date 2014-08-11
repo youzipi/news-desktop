@@ -265,6 +265,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #self.body = self.ui.bodyedit.toPlainText() #已修改的文本
         self.body = self.ui.bodyedit.toHtml() #已修改的文本
         self.body.replace("'","\\'")
+        self.body.replace( 'p, li { white-space: pre-wrap; }\n','')
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
         self.stared = self.ui.starbox.checkState() / 2

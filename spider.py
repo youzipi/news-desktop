@@ -52,9 +52,12 @@ def load(url):
         #print count
         body = str(i.string)
         #print body
+        #print body
         if body == "None":
+            #print i
             if count == 0 and i.find('img'):
-                #print i
+                print "i.find('img')"
+                print i.find('img')
                 src = i.find('img')['src']
                 #number = src[-10:-4]
                 name = src[-10:-4]+".jpg"
@@ -68,11 +71,16 @@ def load(url):
                 try:    
                     urllib.urlretrieve(src, filename)
                     count = count+1
+                    print "count:"
+                    print count
                     print filename
-                    filename2 = dirname2+name
+                    #filename2 = dirname2+name
                     print "replace"
-                    print filename2
+                    #sprint filename2
+                    print i
                     i.find('img')['src'] = filename #更改路径
+                    print "update i:"
+                    print i
                 except:     #图片无法下载
                     #print type(i)
                     i = "<p></p>"   
@@ -111,13 +119,13 @@ def load(url):
     print "count:%d" % count
     #print text
     #print type(text)
-    print type(filename)
+    #print type(filename)
     return title, text, name,unicode(filename)#,unicode(filename2)
 
     
     
     
-url = "http://www.36kr.com/p/213937.html"
+url = "http://news.163.com/14/0806/08/A2V0CIAR00011229.html"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
