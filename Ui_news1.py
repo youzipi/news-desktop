@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\Documents\python\pyqt\demos\ericdemo\news\news1.ui'
 #
-# Created: Sun Aug 03 07:17:50 2014
+# Created: Mon Aug 11 20:27:29 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -95,25 +95,34 @@ class Ui_MainWindow(object):
         self.tabWidget.setElideMode(QtCore.Qt.ElideNone)
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.tab2 = QtGui.QWidget()
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tab2.sizePolicy().hasHeightForWidth())
+        self.tab2.setSizePolicy(sizePolicy)
+        self.tab2.setStyleSheet(_fromUtf8("background:white;"))
         self.tab2.setObjectName(_fromUtf8("tab2"))
         self.tableView = QtGui.QTableView(self.tab2)
-        self.tableView.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.tableView.setGeometry(QtCore.QRect(0, 0, 600, 409))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableView.sizePolicy().hasHeightForWidth())
         self.tableView.setSizePolicy(sizePolicy)
         self.tableView.setMinimumSize(QtCore.QSize(0, 0))
         self.tableView.setStyleSheet(_fromUtf8("background:white;"))
+        self.tableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.tableView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.tableView.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView.setDragEnabled(True)
         self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName(_fromUtf8("tableView"))
         self.tabWidget.addTab(self.tab2, _fromUtf8(""))
         self.tab = QtGui.QWidget()
+        self.tab.setStyleSheet(_fromUtf8("background:white;"))
         self.tab.setObjectName(_fromUtf8("tab"))
         self.tableView_1 = QtGui.QTableView(self.tab)
-        self.tableView_1.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_1.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_1.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_1.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_1.setDragEnabled(True)
@@ -121,9 +130,10 @@ class Ui_MainWindow(object):
         self.tableView_1.setObjectName(_fromUtf8("tableView_1"))
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
         self.tab_2 = QtGui.QWidget()
+        self.tab_2.setStyleSheet(_fromUtf8("background:white;"))
         self.tab_2.setObjectName(_fromUtf8("tab_2"))
         self.tableView_2 = QtGui.QTableView(self.tab_2)
-        self.tableView_2.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_2.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_2.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_2.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_2.setDragEnabled(True)
@@ -131,9 +141,10 @@ class Ui_MainWindow(object):
         self.tableView_2.setObjectName(_fromUtf8("tableView_2"))
         self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
         self.tab_3 = QtGui.QWidget()
+        self.tab_3.setStyleSheet(_fromUtf8("background:white;"))
         self.tab_3.setObjectName(_fromUtf8("tab_3"))
         self.tableView_3 = QtGui.QTableView(self.tab_3)
-        self.tableView_3.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_3.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_3.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_3.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_3.setDragEnabled(True)
@@ -141,9 +152,10 @@ class Ui_MainWindow(object):
         self.tableView_3.setObjectName(_fromUtf8("tableView_3"))
         self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
         self.tab_4 = QtGui.QWidget()
+        self.tab_4.setStyleSheet(_fromUtf8("background:white;"))
         self.tab_4.setObjectName(_fromUtf8("tab_4"))
         self.tableView_4 = QtGui.QTableView(self.tab_4)
-        self.tableView_4.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_4.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_4.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_4.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_4.setDragEnabled(True)
@@ -151,9 +163,10 @@ class Ui_MainWindow(object):
         self.tableView_4.setObjectName(_fromUtf8("tableView_4"))
         self.tabWidget.addTab(self.tab_4, _fromUtf8(""))
         self.tab_6 = QtGui.QWidget()
+        self.tab_6.setStyleSheet(_fromUtf8("background:white;"))
         self.tab_6.setObjectName(_fromUtf8("tab_6"))
         self.tableView_6 = QtGui.QTableView(self.tab_6)
-        self.tableView_6.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_6.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_6.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_6.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_6.setDragEnabled(True)
@@ -161,9 +174,10 @@ class Ui_MainWindow(object):
         self.tableView_6.setObjectName(_fromUtf8("tableView_6"))
         self.tabWidget.addTab(self.tab_6, _fromUtf8(""))
         self.tab_5 = QtGui.QWidget()
+        self.tab_5.setStyleSheet(_fromUtf8("background:white;"))
         self.tab_5.setObjectName(_fromUtf8("tab_5"))
         self.tableView_5 = QtGui.QTableView(self.tab_5)
-        self.tableView_5.setGeometry(QtCore.QRect(0, 0, 8000, 8000))
+        self.tableView_5.setGeometry(QtCore.QRect(0, 0, 600, 409))
         self.tableView_5.setStyleSheet(_fromUtf8("background:white;"))
         self.tableView_5.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableView_5.setDragEnabled(True)
@@ -266,6 +280,8 @@ class Ui_MainWindow(object):
         self.updatebutton.setStyleSheet(_fromUtf8("color: #3e5706;\n"
 "background: #a5cd4e;\n"
 "font: 15pt \"Arial\";\n"
+"padding:5px 0;\n"
+"\n"
 "   "))
         self.updatebutton.setObjectName(_fromUtf8("updatebutton"))
         self.horizontalLayout_2.addWidget(self.updatebutton)
@@ -279,6 +295,7 @@ class Ui_MainWindow(object):
         self.deletebutton.setStyleSheet(_fromUtf8("color:#CC0000;\n"
 "background:#FF6600;\n"
 "font: 15pt \"Arial\";\n"
+"padding:5px 0;\n"
 ""))
         self.deletebutton.setObjectName(_fromUtf8("deletebutton"))
         self.horizontalLayout_2.addWidget(self.deletebutton)
@@ -291,7 +308,6 @@ class Ui_MainWindow(object):
         self.resetbutton.setMinimumSize(QtCore.QSize(75, 31))
         self.resetbutton.setStyleSheet(_fromUtf8("color: #19667d;\n"
 "background: #70c9e3;\n"
-"font: 15pt \"\";\n"
 "font: 75 16pt \"Arial\";"))
         self.resetbutton.setObjectName(_fromUtf8("resetbutton"))
         self.horizontalLayout_2.addWidget(self.resetbutton)
@@ -320,7 +336,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuAbout.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

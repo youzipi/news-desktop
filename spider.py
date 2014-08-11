@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*
+import os
 import sys
 import urllib2,urllib,re
 from bs4 import BeautifulSoup
@@ -38,9 +39,9 @@ def load(url):
     print "img:\n"
     #print img
     text = ""
-    #dirname = "E:/百度/"
+    dirname = "E:/百度/"
     #dirname2 = "E:\\\\百度\\\\"
-    dirname = "D:/自装软件/自装软件/安卓/apache-tomcat-7.0.47/webapps/WebRoot/Image/"
+    #dirname = "D:/自装软件/自装软件/安卓/apache-tomcat-7.0.47/webapps/WebRoot/Image/"
     #pa_url = "http://localhost:8080/WebRoot/Image/"
     dirname=unicode(dirname,"utf8")#.encode("utf-8")
     filename = ""
@@ -67,7 +68,12 @@ def load(url):
                 
                 #i.find('img')['src'] = url 
                 #print i
-                print filename
+                
+                #while os.path.isfile(filename):
+                #    number = 1
+                #    filename.replace('(%d).jpg' % number,'.jpg')
+                #    number += 1
+                #   print filename
                 try:    
                     urllib.urlretrieve(src, filename)
                     count = count+1
@@ -125,7 +131,7 @@ def load(url):
     
     
     
-url = "http://news.163.com/14/0806/08/A2V0CIAR00011229.html"
+#url = "http://news.163.com/14/0806/08/A2V0CIAR00011229.html"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
@@ -133,7 +139,7 @@ url = "http://news.163.com/14/0806/08/A2V0CIAR00011229.html"
 #url = "http://china.firefox.ynet.com/3.1/1407/30/9228127.html"
 
 
-title,body,imgsrc,filename = load(url)
+#title,body,imgsrc,filename = load(url)
 #print imgsrc
 #print title
 #print body

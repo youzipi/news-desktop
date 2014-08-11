@@ -151,12 +151,21 @@ font: 10pt &quot;Arial&quot;;</string>
              <enum>QTabWidget::Rounded</enum>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <property name="elideMode">
              <enum>Qt::ElideNone</enum>
             </property>
             <widget class="QWidget" name="tab2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>新闻列表</string>
              </attribute>
@@ -165,12 +174,12 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -184,6 +193,12 @@ font: 10pt &quot;Arial&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background:white;</string>
               </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
@@ -196,6 +211,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>焦点</string>
              </attribute>
@@ -204,8 +222,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -223,6 +241,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_2">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>国内</string>
              </attribute>
@@ -231,8 +252,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -250,6 +271,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_3">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>国际</string>
              </attribute>
@@ -258,8 +282,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -277,6 +301,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_4">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>体育</string>
              </attribute>
@@ -285,8 +312,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -304,6 +331,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_6">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>科技</string>
              </attribute>
@@ -312,8 +342,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
@@ -331,6 +361,9 @@ font: 10pt &quot;Arial&quot;;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_5">
+             <property name="styleSheet">
+              <string notr="true">background:white;</string>
+             </property>
              <attribute name="title">
               <string>文娱</string>
              </attribute>
@@ -339,8 +372,8 @@ font: 10pt &quot;Arial&quot;;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>8000</width>
-                <height>8000</height>
+                <width>600</width>
+                <height>409</height>
                </rect>
               </property>
               <property name="styleSheet">
