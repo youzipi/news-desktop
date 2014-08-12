@@ -17,7 +17,9 @@ from PyQt4.QtSql import *
 from Ui_news1 import Ui_MainWindow
 from Ui_setting import Ui_Dialog
 from spider import *
-from imgzip import *
+import base64
+import os
+#from imgzip import *
 
 
 QtCore.QTextCodec.setCodecForCStrings(QtCore.QTextCodec.codecForName("UTF-8"))
@@ -58,19 +60,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         网址输入
         """
         url = self.ui.urlLine.text()
-        url = str(url)
+        #url = str(url)
+        print type(url)
         self.ui.urlLine.setText("")
 
         #self.cid = self.ui.categorizebox_p.currentIndex()+1
-        self.title, self.body, self.imgsrc,self.filename = load(url)       #**********网页解析********
+        #self.title, self.body, self.imgsrc,self.filename = load(url)       #**********网页解析********
+        self.title, self.body, self.imgsrc,self.imgpath = load(str(url))       #**********网页解析********
         print "self.imgsrc:"
         print self.imgsrc
-        print "self.filename:"
-        print self.filename
+        #print "self.filename:"
+        #print self.filename
         #self.filename = unicode(self.filename,"utf8")
         #print self.filename
-        if self.filename:
-            imgzip(self.filename)      #图片压缩
+        
         self.ui.titleedit.setPlainText(self.title)
         #self.ui.bodyedit.setPlainText(self.body)
         self.ui.bodyedit.setHtml(self.body)
@@ -78,9 +81,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         r = self.ui.tableView.model().rowCount()  
         self.nid = self.ui.tableView.model().index(r-1, 0).data().toInt()[0] + 1 #获取插入位置
         ptime = time.strftime('%Y-%m-%d',time.localtime(time.time()))  #
-        
+        imgpath = str(self.imgpath)
+        imgpath = base64.b64encode(imgpath)
         stared = 0
-        tuple1 = (self.nid, self.cid, self.title , self.body , ptime, self.imgsrc, stared)
+        tuple1 = (self.nid, self.cid, self.title , self.body , ptime, self.imgsrc,imgpath, stared)
         Model.insert(self.ui.tableView.model(), tuple1)
 
     def showdata(self):
@@ -374,7 +378,7 @@ class Model(QSqlTableModel):
         self.showdata()
         
     def insert(self, tuple1):
-        insert = "insert into t_news (nid,cid,title,body,ptime,imgsrc, deleted) values (%d,%d,'%s','%s','%s','%s',%d);" % tuple1
+        insert = "insert into t_news (nid,cid,title,body,ptime,imgsrc, imgpath, deleted) values (%d,%d,'%s','%s','%s','%s','%s',%d);" % tuple1
         flag = self.q.exec_(unicode(insert))
         print tuple1
         if flag == False: 
@@ -384,9 +388,22 @@ class Model(QSqlTableModel):
         self.setEditStrategy(QSqlTableModel.OnManualSubmit)
         self.showdata()
     def delete(self,nid):
+        ###删除图片
+        selection = "SELECT imgpath FROM t_news WHERE nid = %d;" % nid
+        self.q.exec_(selection)
+        if self.q.first():        #读取cid，标题，摘要和正文
+            imgpath = self.q.value(0).toString()
+        print imgpath
+        print type(imgpath)     #str
+        imgpath = eval(base64.b64decode(imgpath)) #eval():str->tuple
+        print imgpath
+        print type(imgpath)     #list  
+        for img in imgpath:
+            os.remove(img)      #删除图片
+            
+            
         delete = "DELETE FROM t_news WHERE nid = %d;" % nid
         flag3 = self.q.exec_(unicode(delete))
-
         if flag3 == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
