@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*
 import os
 import sys
+#import time
+import re
 import urllib2,urllib,re
 from bs4 import BeautifulSoup
 from imgzip import *
@@ -82,12 +84,16 @@ def load(url):
                 
                 #i.find('img')['src'] = url 
                 #print i
-                
-                #while os.path.isfile(filename):
-                #    number = 1
-                #    filename.replace('(%d).jpg' % number,'.jpg')
-                #    number += 1
-                #   print filename
+                number = 1
+                while os.path.isfile(filename):
+                    #filename.replace('.jpg','(%d).jpg' % number)
+                    #filename = filename.replace('.jpg','%d.jpg' % number)
+                    #tail = '(%d).jpg' % number
+                    filename = re.sub('(\(\d+\))?.jpg','(%d).jpg' % number, filename)    #匹配.jpg,(1..999)
+                    number += 1
+                    print number
+                    print filename
+                    #time.sleep(5)
                 try:    
                     urllib.urlretrieve(src, filename)
                     filepath += [filename]
