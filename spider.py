@@ -2,7 +2,7 @@
 import os
 import sys
 #import time
-import re
+#import re
 import urllib2,urllib,re
 from bs4 import BeautifulSoup
 from imgzip import *
@@ -44,8 +44,9 @@ def load(url):
     #print type(title)
     t = soup.find_all("p")
     span = soup.find_all("span")
-    #print "t:\n"
+    print "t:\n"
     #print t
+    print "t-end\n\n\n\n"
     #img = t.find_all("img")
     #print "img:\n"
     #print img
@@ -63,6 +64,8 @@ def load(url):
     count= 0
     #print type(text)
     for i in t:
+        if i.find('p'):
+            continue
         #print "count"
         #print count
         body = str(i.string)
@@ -158,7 +161,7 @@ def load(url):
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
 #url = "http://www.36kr.com/p/214479.html"
-#url = "http://china.firefox.ynet.com/3.1/1407/30/9228127.html"
+#url = "http://ent.firefox.news.cn/14/0813/08/ZONF6UWYVBS2M8HQ.html"
 
 
 #title,body,imgsrc,filepath = load(url)

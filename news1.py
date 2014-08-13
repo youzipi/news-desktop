@@ -418,9 +418,10 @@ class Model(QSqlTableModel):
         print imgpath
         print type(imgpath)     #list  
         for img in imgpath:
-            os.remove(img)      #删除图片
-            
-            
+            try:
+                os.remove(img)      #删除图片
+            except:
+                continue
         delete = "DELETE FROM t_news WHERE nid = %d;" % nid
         flag3 = self.q.exec_(unicode(delete))
         if flag3 == False: 
