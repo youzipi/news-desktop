@@ -4,10 +4,17 @@ import sys
 import urllib2,urllib,re
 from bs4 import BeautifulSoup
 from imgzip import *
+import ConfigParser
 #import base64
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+
+config = ConfigParser.SafeConfigParser()
+config.read("setting.ini")
+dirpath = config.get("imgpath","dirpath")
+dirpath=unicode(dirpath,"utf8")
 
 
 
@@ -41,11 +48,11 @@ def load(url):
     #print "img:\n"
     #print img
     text = ""
-    dirname = "E:/百度/"
+    #dirpath = "E:/百度/"
     #dirname2 = "E:\\\\百度\\\\"
-    #dirname = "D:/自装软件/自装软件/安卓/apache-tomcat-7.0.47/webapps/WebRoot/Image/"
+    #dirpath = "D:/自装软件/自装软件/安卓/apache-tomcat-7.0.47/webapps/WebRoot/Image/"
     #pa_url = "http://localhost:8080/WebRoot/Image/"
-    dirname=unicode(dirname,"utf8")#.encode("utf-8")
+    #dirpath=unicode(dirpath,"utf8")#.encode("utf-8")
     filename = ""
     name0 = ""
     name = ""
@@ -69,7 +76,7 @@ def load(url):
                 name = src[-10:-4]+".jpg"
                 if count == 0:
                     name0 = name
-                filename = dirname+name#下载路径
+                filename = dirpath+name#下载路径
                 #url = pa_url + number+".jpg"    #服务器路径
                 #print "filename:"
                 
@@ -116,7 +123,7 @@ def load(url):
             if count == 0 and i.find('img'):
                 src = i.find('img')['src']
                 name = src[-10:-4]+".jpg"
-                filename = dirname+name#下载路径
+                filename = dirpath+name#下载路径
                 i.find('img')['src'] = filename #更改路径
                 print filename
                 try:    

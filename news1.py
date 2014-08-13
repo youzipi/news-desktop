@@ -19,6 +19,7 @@ from Ui_setting import Ui_Dialog
 from spider import *
 import base64
 import os
+import ConfigParser
 #from imgzip import *
 
 
@@ -293,6 +294,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSignature("")
     def on_deletebutton_clicked(self):
         Model.delete(self.ui.tableView.model(), self.nid)
+        self.ui.titleedit.setPlainText("")
+        self.ui.digestedit.setPlainText("")
+        #self.ui.bodyedit.setPlainText(self.body)
+        self.ui.bodyedit.setHtml("")
+        self.ui.categorizebox_m.setCurrentIndex(0)
+        self.ui.starbox.setCheckState(0)
         
     @pyqtSignature("")
     def on_actionAbout_triggered(self):
@@ -319,13 +326,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     
 """
-def createConnection():    
+def createConnection():
+        
+        #host = "localhost"
+        #port = 3306
+        #database = "test"
+        #username = "root"
+        #password = "123456"
+        
+        config = ConfigParser.SafeConfigParser()
+        config.read("setting.ini")
+        sections = config.sections()
+        host = config.get("mysql","host")
+        port = int(config.get("mysql","port"))
+        database = config.get("mysql","database")
+        username = config.get("mysql","username")
+        password = config.get("mysql","password")
+        
         db = QSqlDatabase.addDatabase("QMYSQL")
-        host = "localhost"
-        port = 3306
-        database = "test"
-        username = "root"
-        password = "123456"
+
         db.setHostName(host)
         db.setPort(port)
         db.setDatabaseName(database)
