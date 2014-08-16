@@ -17,8 +17,8 @@ py2exe_options = {
 setup(
       name = 'Teemo News for Desktop',
       version = '1.0',
-      #windows = ['news1.py','Ui_news1.py','spider.py'], 
-      console = ['news1.py','Ui_news1.py','spider.py'], 
+      windows = ['news1.py','Ui_news1.py','spider.py'], 
+      #console = ['news1.py','Ui_news1.py','spider.py'], 
       #windows = ['news1.py'], 
       zipfile = None,
       options = {'py2exe': py2exe_options}

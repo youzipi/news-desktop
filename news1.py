@@ -62,14 +62,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         url = self.ui.urlLine.text()
         #url = str(url)
-        print type(url)
+        #print type(url)
         self.ui.urlLine.setText("")
 
         #self.cid = self.ui.categorizebox_p.currentIndex()+1
         #self.title, self.body, self.imgsrc,self.filename = load(url)       #**********网页解析********
         self.title, self.body, self.imgsrc,self.imgpath = load(str(url))       #**********网页解析********
-        print "self.imgsrc:"
-        print self.imgsrc
+        #print "self.imgsrc:"
+        #print self.imgsrc
         #print "self.filename:"
         #print self.filename
         #self.filename = unicode(self.filename,"utf8")
@@ -274,8 +274,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.title = self.ui.titleedit.toPlainText()
         self.digest = self.ui.digestedit.toPlainText()
         self.stared = self.ui.starbox.checkState() / 2
-        print "self.stared"
-        print self.stared
+        #print "self.stared"
+        #print self.stared
         tuple2 = (self.cid, self.title, self.digest, self.body, self.stared, self.nid)
         Model.update(self.ui.tableView.model(), tuple2)
     
@@ -386,7 +386,7 @@ class Model(QSqlTableModel):
         mainWindow.showtables()
     def update(self,tuple2):
         update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s',deleted = %d WHERE nid = %d;" % tuple2
-        print tuple2
+        #print tuple2
         flag2 = self.q.exec_(unicode(update))
 
         if flag2 == False: 
@@ -399,7 +399,7 @@ class Model(QSqlTableModel):
     def insert(self, tuple1):
         insert = "insert into t_news (nid,cid,title,body,ptime,imgsrc, imgpath, deleted) values (%d,%d,'%s','%s','%s','%s','%s',%d);" % tuple1
         flag = self.q.exec_(unicode(insert))
-        print tuple1
+        #print tuple1
         if flag == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
@@ -412,11 +412,11 @@ class Model(QSqlTableModel):
         self.q.exec_(selection)
         if self.q.first():        #读取cid，标题，摘要和正文
             imgpath = self.q.value(0).toString()
-        print imgpath
-        print type(imgpath)     #str
+        #print imgpath
+        #print type(imgpath)     #str
         imgpath = eval(base64.b64decode(imgpath)) #eval():str->tuple
-        print imgpath
-        print type(imgpath)     #list  
+        #print imgpath
+        #print type(imgpath)     #list  
         for img in imgpath:
             try:
                 os.remove(img)      #删除图片

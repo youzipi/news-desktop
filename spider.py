@@ -4,7 +4,8 @@ import sys
 #import time
 #import re
 import urllib2,urllib,re
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup,SoupStrainer
+import chardet
 from imgzip import *
 import ConfigParser
 #import base64
@@ -18,7 +19,8 @@ config.read("setting.ini")
 dirpath = config.get("imgpath","dirpath")
 dirpath=unicode(dirpath,"utf8")
 
-
+#tags = SoupStrainer("head","p","span")
+#tags = SoupStrainer("head")#,"p","span")
 
 def load(url):
     try:
@@ -31,8 +33,15 @@ def load(url):
         #print body
     except(urllib2.HTTPError):
         return 0
-    soup = BeautifulSoup(html,from_encoding='GB18030')
+    encoding = chardet.detect(html)['encoding']     #获取网页编码
+    #print encoding
+    soup = BeautifulSoup(html,"lxml",from_encoding=encoding)
+    #soup = BeautifulSoup(htmlfrom_encoding='GB18030')
+    #soup = BeautifulSoup(html,from_encoding='utf-8')
+    #soup = BeautifulSoup(html)  #同一
     #print soup
+    #print "soup -end\n\n"
+    #print soup.head
     title = soup.head.title
     #title = soup.title
     #print title
@@ -44,9 +53,9 @@ def load(url):
     #print type(title)
     t = soup.find_all("p")
     span = soup.find_all("span")
-    print "t:\n"
+    #print "t:\n"
     #print t
-    print "t-end\n\n\n\n"
+    #print "t-end\n\n\n\n"
     #img = t.find_all("img")
     #print "img:\n"
     #print img
@@ -94,23 +103,23 @@ def load(url):
                     #tail = '(%d).jpg' % number
                     filename = re.sub('(\(\d+\))?.jpg','(%d).jpg' % number, filename)    #匹配.jpg,(1..999)
                     number += 1
-                    print number
-                    print filename
+                    #print number
+                    #print filename
                     #time.sleep(5)
                 try:    
                     urllib.urlretrieve(src, filename)
                     filepath += [filename]
                     count = count+1
-                    print "count:"
-                    print count
-                    print filename
+                    #print "count:"
+                    #print count
+                    #print filename
                     #filename2 = dirname2+name
-                    print "replace"
+                    #print "replace"
                     #sprint filename2
-                    print i
+                    #print i
                     i.find('img')['src'] = filename #更改路径
-                    print "update i:"
-                    print i
+                    #print "update i:"
+                    #print i
                     imgzip(filename)      #图片压缩
                 except:     #图片无法下载
                     #print type(i)
@@ -134,7 +143,7 @@ def load(url):
                 name = src[-10:-4]+".jpg"
                 filename = dirpath+name#下载路径
                 i.find('img')['src'] = filename #更改路径
-                print filename
+                #print filename
                 try:    
                     urllib.urlretrieve(src, filename)
                     count = count+1
@@ -147,7 +156,7 @@ def load(url):
                     continue
             
 
-    print "count:%d" % count
+    #print "count:%d" % count
     #print text
     #print type(text)
     #print type(filename)
@@ -156,11 +165,11 @@ def load(url):
     
     
     
-#url = "http://news.163.com/14/0806/08/A2V0CIAR00011229.html"
+#url = "http://news.163.com/14/0816/02/A3O3MTA500014AED.html"
 #url = "http://cs.nuist.edu.cn/toArticle.action?id=2336"
 #url = "http://news.sina.com.cn/c/2014-05-23/142430211704.shtml"
 #url = "http://www.jfdaily.com/shehui/new/201405/t20140523_374092.html"
-#url = "http://www.36kr.com/p/214479.html"
+#url = "http://www.36kr.com/p/214604.html"
 #url = "http://ent.firefox.news.cn/14/0813/08/ZONF6UWYVBS2M8HQ.html"
 
 
