@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup,SoupStrainer
 import chardet
 from imgzip import *
 import ConfigParser
+import lxml
 #import base64
 
 reload(sys)
@@ -35,7 +36,8 @@ def load(url):
         return 0
     encoding = chardet.detect(html)['encoding']     #获取网页编码
     #print encoding
-    soup = BeautifulSoup(html,"lxml",from_encoding=encoding)
+    #soup = BeautifulSoup(html,"lxml",from_encoding=encoding)
+    soup = BeautifulSoup(html,from_encoding=encoding)
     #soup = BeautifulSoup(htmlfrom_encoding='GB18030')
     #soup = BeautifulSoup(html,from_encoding='utf-8')
     #soup = BeautifulSoup(html)  #同一

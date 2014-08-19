@@ -385,9 +385,13 @@ class Model(QSqlTableModel):
         self.__init__()
         mainWindow.showtables()
     def update(self,tuple2):
-        update = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s',deleted = %d WHERE nid = %d;" % tuple2
+        update_comment = "UPDATE t_comment SET cid= %d WHERE nid = %d;" %  (tuple2[0],tuple2[5])
+        update_news = "UPDATE t_news SET cid= %d, title= '%s', digest= '%s', body= '%s',deleted = %d WHERE nid = %d;" % tuple2
+
         #print tuple2
-        flag2 = self.q.exec_(unicode(update))
+        flag2 = self.q.exec_(unicode(update_comment))
+        flag2 = self.q.exec_(unicode(update_news))
+        
 
         if flag2 == False: 
             print self.q.lastError()
@@ -422,8 +426,10 @@ class Model(QSqlTableModel):
                 os.remove(img)      #删除图片
             except:
                 continue
-        delete = "DELETE FROM t_news WHERE nid = %d;" % nid
-        flag3 = self.q.exec_(unicode(delete))
+        delete_comment = "DELETE FROM t_comment WHERE nid = %d;" % nid
+        delete_news = "DELETE FROM t_news WHERE nid = %d;" % nid
+        flag3 = self.q.exec_(unicode(delete_comment))
+        flag3 = self.q.exec_(unicode(delete_news))
         if flag3 == False: 
             print self.q.lastError()
             print (self.q.lastError().text())
