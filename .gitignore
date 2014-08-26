@@ -4,5 +4,4 @@
 *.coverage
 build
 dist
-*.sql
 *.7z
