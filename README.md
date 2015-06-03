@@ -5,3 +5,5 @@ teemo news for desktop
 
 MySQL
 BeautifulSoup
+
+![截图](https://github.com/youzipi/news-desktop/blob/dev5/screenshot.jpg)
